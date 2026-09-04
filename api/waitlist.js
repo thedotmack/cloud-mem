@@ -40,7 +40,7 @@ module.exports = async function handler(req, res) {
     body: JSON.stringify({
       email,
       unsubscribed: false,
-      segments: [SEGMENT_ID],
+      segments: [{ id: SEGMENT_ID }],
     }),
   });
 
