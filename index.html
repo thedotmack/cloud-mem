@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>cloud-mem.ai — AI memory in the cloud</title>
+  <meta name="description" content="AI memory in the cloud. Be first in line for CMEM Pro — one memory your assistants share.">
+  <link rel="canonical" href="https://cloud-mem.ai/">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://cloud-mem.ai/">
+  <meta property="og:title" content="cloud-mem.ai — AI memory in the cloud">
+  <meta property="og:description" content="CMEM Pro is coming. Leave your email and we'll write when it's ready.">
+  <meta property="og:image" content="/mood.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="theme-color" content="#F4F1EA">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Oswald:wght@200;300;400&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #F4F1EA;
+      --ink: #16150F;
+      --muted: #6B675C;
+      --soft: #9B968A;
+      --line: #C9C4B6;
+      --line-soft: #DDD8CB;
+      --card: #FBF9F4;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg);
+      color: var(--ink);
+      font-family: Inter, system-ui, -apple-system, sans-serif;
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      .fade-in, .cm-breathe, .cm-drift, .cm-light { animation: none !important; }
+    }
+    .wrap { max-width: 1120px; margin: 0 auto; padding: 0 28px; }
+    header {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 28px 0 8px;
+    }
+    .wordmark {
+      font-family: Oswald, sans-serif;
+      font-weight: 300;
+      font-size: 18px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--ink);
+      text-decoration: none;
+    }
+    .wordmark span { color: var(--soft); }
+    .badge {
+      font-size: 12px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .hero {
+      text-align: center;
+      padding: 72px 0 40px;
+    }
+    .hero h1 {
+      font-family: Oswald, sans-serif;
+      font-weight: 200;
+      font-size: clamp(42px, 8vw, 92px);
+      line-height: 0.95;
+      letter-spacing: -0.01em;
+      margin: 0 auto 22px;
+      max-width: 16ch;
+    }
+    .hero p.sub {
+      font-size: 18px;
+      line-height: 1.5;
+      color: var(--muted);
+      max-width: 36ch;
+      margin: 0 auto;
+    }
+    .signup {
+      display: flex;
+      justify-content: center;
+      gap: 14px;
+      margin-top: 40px;
+      flex-wrap: wrap;
+    }
+    .signup input {
+      width: min(360px, 100%);
+      font-size: 17px;
+      padding: 18px 24px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: transparent;
+      outline: none;
+      font-family: inherit;
+      color: var(--ink);
+      transition: border-color .3s ease, box-shadow .3s ease, background .3s ease;
+    }
+    .signup input:hover { border-color: #A9A392; }
+    .signup input:focus {
+      border-color: var(--ink);
+      background: var(--card);
+      box-shadow: 0 0 0 4px rgba(22,21,15,.08);
+    }
+    .signup button {
+      font-size: 16px;
+      font-weight: 500;
+      padding: 18px 28px;
+      border: none;
+      border-radius: 999px;
+      background: var(--ink);
+      color: #FDFCF9;
+      cursor: pointer;
+      transition: transform .25s ease, box-shadow .25s ease, opacity .2s;
+    }
+    .signup button:hover { transform: translateY(-2px); box-shadow: 0 10px 24px rgba(22,21,15,.16); }
+    .signup button:disabled { opacity: .55; cursor: wait; transform: none; box-shadow: none; }
+    .msg {
+      margin-top: 18px;
+      min-height: 1.4em;
+      font-size: 15px;
+      color: var(--muted);
+    }
+    .msg.ok { color: var(--ink); }
+    .msg.err { color: #8B3A2F; }
+    .integrations {
+      text-align: center;
+      padding: 28px 0 56px;
+    }
+    .integrations .label {
+      font-size: 12px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--soft);
+      margin-bottom: 22px;
+    }
+    .pills {
+      display: flex;
+      justify-content: center;
+      gap: 14px;
+      flex-wrap: wrap;
+      max-width: 920px;
+      margin: 0 auto;
+    }
+    .pill {
+      font-family: Oswald, sans-serif;
+      font-weight: 300;
+      font-size: 15px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+      padding: 11px 18px;
+      border: 1px solid var(--line-soft);
+      border-radius: 999px;
+      background: var(--card);
+      transition: transform .35s cubic-bezier(.22,1,.36,1), box-shadow .35s ease, color .35s ease, border-color .35s ease;
+    }
+    .pill:hover {
+      transform: translateY(-3px);
+      color: var(--ink);
+      border-color: #B9B3A2;
+      box-shadow: 0 8px 22px rgba(22,21,15,.08);
+    }
+    .cm-breathe { animation: breathe 5.5s ease-in-out infinite; }
+    @keyframes breathe {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-4px); }
+    }
+    .mood {
+      padding: 0 0 48px;
+    }
+    .mood-frame {
+      position: relative;
+      border-radius: 24px;
+      overflow: hidden;
+    }
+    .mood-frame img {
+      display: block;
+      width: 100%;
+      height: clamp(280px, 48vw, 560px);
+      object-fit: cover;
+    }
+    .mood-frame .caption {
+      position: absolute;
+      left: 40px;
+      bottom: 32px;
+      margin: 0;
+      font-family: "Instrument Serif", serif;
+      font-size: clamp(22px, 3vw, 30px);
+      color: #FDFCF9;
+      text-shadow: 0 1px 24px rgba(20,21,15,.35);
+      max-width: 18ch;
+    }
+    footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+      padding: 28px 0 48px;
+      font-size: 14px;
+      color: var(--muted);
+    }
+    .fade-in {
+      opacity: 0;
+      transform: translateY(12px);
+      animation: rise .9s ease forwards;
+    }
+    .fade-in.d2 { animation-delay: .18s; }
+    .fade-in.d3 { animation-delay: .36s; }
+    @keyframes rise {
+      to { opacity: 1; transform: none; }
+    }
+    @media (max-width: 640px) {
+      .hero { padding: 48px 0 28px; }
+      .signup { flex-direction: column; align-items: stretch; }
+      .signup input, .signup button { width: 100%; }
+      .mood-frame .caption { left: 20px; bottom: 20px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <a class="wordmark" href="/">cloud-mem<span>.ai</span></a>
+      <div class="badge">CMEM Pro — Early access</div>
+    </header>
+
+    <section class="hero">
+      <h1 class="fade-in">AI memory in the cloud</h1>
+      <p class="sub fade-in d2">CMEM Pro is coming. Leave your email and we'll write when it's ready.</p>
+      <form class="signup fade-in d3" id="waitlist" novalidate>
+        <input id="email" type="email" name="email" placeholder="Email" autocomplete="email" required aria-label="Email for the CMEM Pro waitlist">
+        <button type="submit" id="submit">Join the waitlist</button>
+      </form>
+      <p class="msg" id="msg" role="status" aria-live="polite"></p>
+    </section>
+
+    <section class="integrations" aria-label="Platforms">
+      <p class="label">Remembers across</p>
+      <div class="pills cm-breathe" id="pills"></div>
+    </section>
+
+    <section class="mood">
+      <div class="mood-frame">
+        <img src="/mood.png" alt="Calm architectural space overlooking the sea" width="1600" height="1000">
+        <p class="caption">A quiet, permanent place for everything you've said.</p>
+      </div>
+    </section>
+
+    <footer>
+      <div class="wordmark" style="font-size:16px">cloud-mem<span>.ai</span></div>
+      <div>© 2026 cloud-mem</div>
+    </footer>
+  </div>
+  <script>
+    const platforms = ["Claude","ChatGPT","Cursor","Gemini","Copilot","Perplexity","Grok","Mistral","Llama","DeepSeek","Windsurf","Replit","Devin","Codex","Manus","Poe"];
+    const pills = document.getElementById('pills');
+    platforms.forEach((name) => {
+      const el = document.createElement('div');
+      el.className = 'pill';
+      el.textContent = name;
+      pills.appendChild(el);
+    });
+
+    const form = document.getElementById('waitlist');
+    const email = document.getElementById('email');
+    const submit = document.getElementById('submit');
+    const msg = document.getElementById('msg');
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const value = (email.value || '').trim();
+      msg.className = 'msg';
+      msg.textContent = '';
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) {
+        msg.className = 'msg err';
+        msg.textContent = 'Enter a valid email.';
+        email.focus();
+        return;
+      }
+      submit.disabled = true;
+      try {
+        const res = await fetch('/api/waitlist', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email: value }),
+        });
+        const data = await res.json().catch(() => ({}));
+        if (!res.ok) throw new Error(data.error || 'Something went wrong');
+        msg.className = 'msg ok';
+        msg.textContent = "Thank you. We'll write when CMEM Pro is ready.";
+        form.reset();
+      } catch (err) {
+        msg.className = 'msg err';
+        msg.textContent = err.message || 'Could not join right now.';
+      } finally {
+        submit.disabled = false;
+      }
+    });
+  </script>
+</body>
+</html>
