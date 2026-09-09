@@ -83,17 +83,17 @@
 
     .hero {
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 48px;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      gap: 40px;
       align-items: center;
-      padding: 48px 0 72px;
+      padding: 36px 0 80px;
     }
     .hero h1 {
       font-family: Oswald, sans-serif;
       font-weight: 500;
-      font-size: clamp(52px, 8vw, 92px);
-      line-height: 0.92;
-      letter-spacing: -0.01em;
+      font-size: clamp(56px, 8.4vw, 96px);
+      line-height: 0.88;
+      letter-spacing: -0.02em;
       text-transform: uppercase;
     }
     .rule {
@@ -109,16 +109,17 @@
       max-width: 36ch;
     }
     .hero-photo {
-      border-radius: 28px;
+      border-radius: 0;
       overflow: hidden;
-      min-height: 420px;
+      min-height: 520px;
+      margin: 0 -32px 0 0;
     }
     .hero-photo img {
       display: block;
       width: 100%;
       height: 100%;
       object-fit: cover;
-      min-height: 420px;
+      min-height: 520px;
     }
     .signup {
       display: flex;
@@ -127,6 +128,22 @@
       margin-top: 28px;
       flex-wrap: wrap;
     }
+    .signup.united {
+      display: inline-flex;
+      flex-wrap: nowrap;
+      gap: 0;
+      padding: 4px 4px 4px 4px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: #F8F4EC;
+    }
+    .signup.united input {
+      border: 0;
+      background: transparent;
+      width: min(260px, 52vw);
+      padding: 12px 16px;
+    }
+    .signup.united input:focus { outline: none; }
     .signup input {
       width: min(280px, 100%);
       font-size: 15px;
@@ -149,6 +166,7 @@
       color: var(--foam);
       cursor: pointer;
       font-family: inherit;
+      white-space: nowrap;
     }
     .signup button:disabled { opacity: .55; cursor: wait; }
     .msg { margin-top: 12px; min-height: 1.3em; font-size: 14px; color: var(--muted); }
@@ -175,7 +193,7 @@
       min-height: 420px;
       display: flex;
       flex-direction: column;
-      box-shadow: 0 1px 0 rgba(22,21,15,.04);
+      box-shadow: 0 8px 28px rgba(22,21,15,.05);
     }
     .icon-circle {
       width: 42px;
@@ -422,10 +440,13 @@
       .hero, .features-grid, .how-grid { grid-template-columns: 1fr; }
       .nav { display: none; }
       .hero { padding-top: 24px; }
+      .hero-photo { margin: 0; min-height: 360px; border-radius: 20px; }
+      .hero-photo img { min-height: 360px; }
     }
     @media (max-width: 640px) {
       .signup { flex-direction: column; }
-      .signup input, .signup button { width: 100%; }
+      .signup.united { display: flex; width: 100%; }
+      .signup input, .signup button, .signup.united input { width: 100%; }
     }
   </style>
 </head>
@@ -452,7 +473,7 @@
         <h1 class="fade-in">AI memory<br>in the cloud</h1>
         <div class="rule fade-in d2"></div>
         <p class="lede fade-in d2">Cloud Mem remembers your conversations across tools so you can find what matters, when you need it.</p>
-        <form class="signup fade-in d3 waitlist-form" novalidate>
+        <form class="signup united fade-in d3 waitlist-form" novalidate>
           <input class="waitlist-email" type="email" name="email" placeholder="Enter your work email" autocomplete="email" required aria-label="Email for the Cloud Mem waitlist">
           <button type="submit">Join the waitlist →</button>
         </form>
@@ -570,7 +591,13 @@
         </div>
         <div class="phone reveal" aria-hidden="true">
           <div class="phone-screen">
-            <div class="phone-top"><span>Memory timeline</span><span aria-hidden="true">☁</span></div>
+            <div class="phone-top">
+              <span>Memory timeline</span>
+              <span class="brand" style="font-size:11px;letter-spacing:0;text-transform:none;gap:6px">
+                <svg width="14" height="10" viewBox="0 0 22 16" fill="none" aria-hidden="true"><path d="M16.6 6.2A5.1 5.1 0 0 0 6.8 5.4 4.2 4.2 0 0 0 2 9.4 3.7 3.7 0 0 0 5.6 14h11.2A4.2 4.2 0 0 0 16.6 6.2Z" fill="#16150F"/></svg>
+                Cloud Mem
+              </span>
+            </div>
             <div class="tl">
               <article class="tl-card">
                 <div class="k">Agent</div>
