@@ -1,3 +1,5 @@
-# cloud-mem.ai
+# Cloud Mem
 
-Landing page for [cloud-mem.ai](https://cloud-mem.ai) — AI memory in the cloud. Email waitlist for CMEM Pro.
+Public waitlist for [cloud-mem.ai](https://cloud-mem.ai) — memory that stays with you.
+
+The site is a static landing plus a Vercel serverless POST at `/api/waitlist` (Resend contacts).

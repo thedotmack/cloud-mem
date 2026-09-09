@@ -3,13 +3,14 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>cloud-mem.ai — AI memory in the cloud</title>
-  <meta name="description" content="AI memory in the cloud. Be first in line for CMEM Pro — one memory your assistants share.">
+  <title>Cloud Mem — memory that stays with you</title>
+  <meta name="description" content="Cloud Mem is memory that stays with you. Leave your email and we'll write when it's ready.">
   <link rel="canonical" href="https://cloud-mem.ai/">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://cloud-mem.ai/">
-  <meta property="og:title" content="cloud-mem.ai — AI memory in the cloud">
-  <meta property="og:description" content="CMEM Pro is coming. Leave your email and we'll write when it's ready.">
+  <meta property="og:title" content="Cloud Mem — memory that stays with you">
+  <meta property="og:description" content="Memory that stays with you. Leave your email and we'll write when it's ready.">
   <meta property="og:image" content="/mood.png">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="theme-color" content="#F4F1EA">
@@ -44,6 +45,19 @@
       display: flex; align-items: center; justify-content: space-between;
       padding: 28px 0 8px;
     }
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--ink);
+      text-decoration: none;
+    }
+    .brand .mark {
+      display: block;
+      width: 28px;
+      height: 28px;
+      flex: 0 0 auto;
+    }
     .wordmark {
       font-family: Oswald, sans-serif;
       font-weight: 300;
@@ -51,9 +65,8 @@
       letter-spacing: 0.08em;
       text-transform: uppercase;
       color: var(--ink);
-      text-decoration: none;
     }
-    .wordmark span { color: var(--soft); }
+    .wordmark .quiet { color: var(--soft); }
     .badge {
       font-size: 12px;
       letter-spacing: 0.14em;
@@ -204,6 +217,7 @@
       font-size: 14px;
       color: var(--muted);
     }
+    footer .brand .mark { width: 22px; height: 22px; }
     .fade-in {
       opacity: 0;
       transform: translateY(12px);
@@ -225,15 +239,18 @@
 <body>
   <div class="wrap">
     <header>
-      <a class="wordmark" href="/">cloud-mem<span>.ai</span></a>
-      <div class="badge">CMEM Pro — Early access</div>
+      <a class="brand" href="/">
+        <img class="mark" src="/mark.svg" alt="" width="28" height="28">
+        <span class="wordmark">Cloud Mem</span>
+      </a>
+      <div class="badge">Early access</div>
     </header>
 
     <section class="hero">
-      <h1 class="fade-in">AI memory in the cloud</h1>
-      <p class="sub fade-in d2">CMEM Pro is coming. Leave your email and we'll write when it's ready.</p>
+      <h1 class="fade-in">Cloud Mem</h1>
+      <p class="sub fade-in d2">Memory that stays with you. Leave your email and we'll write when it's ready.</p>
       <form class="signup fade-in d3" id="waitlist" novalidate>
-        <input id="email" type="email" name="email" placeholder="Email" autocomplete="email" required aria-label="Email for the CMEM Pro waitlist">
+        <input id="email" type="email" name="email" placeholder="Email" autocomplete="email" required aria-label="Email for the Cloud Mem waitlist">
         <button type="submit" id="submit">Join the waitlist</button>
       </form>
       <p class="msg" id="msg" role="status" aria-live="polite"></p>
@@ -252,8 +269,11 @@
     </section>
 
     <footer>
-      <div class="wordmark" style="font-size:16px">cloud-mem<span>.ai</span></div>
-      <div>© 2026 cloud-mem</div>
+      <div class="brand">
+        <img class="mark" src="/mark.svg" alt="" width="22" height="22">
+        <span class="wordmark" style="font-size:16px">Cloud Mem<span class="quiet">.ai</span></span>
+      </div>
+      <div>© 2026 Cloud Mem</div>
     </footer>
   </div>
   <script>
@@ -292,7 +312,7 @@
         const data = await res.json().catch(() => ({}));
         if (!res.ok) throw new Error(data.error || 'Something went wrong');
         msg.className = 'msg ok';
-        msg.textContent = "Thank you. We'll write when CMEM Pro is ready.";
+        msg.textContent = "Thank you. We'll write when Cloud Mem is ready.";
         form.reset();
       } catch (err) {
         msg.className = 'msg err';
