@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<!--
+  Canonical structure/copy reconstruction from Claude Design export shots
+  (project d4a95a86-786c-4711-b123-2022ce7270fe).
+
+  This is NOT the unpublished box HTML. It is layout/copy truth extracted
+  from first-draft-hero, first-draft-visible, refinement-state, animate-1/2/3.
+
+  RAW DESIGN still uses "CMEM Pro" in a few waitlist strings.
+  LIVE SITE must rewrite those to Cloud Mem — see README.md.
+-->
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Cloud-mem landing page — extracted template</title>
+  <style>
+    :root { --bg:#F4F1EA; --ink:#16150F; --muted:#6B675C; --soft:#9B968A; --line:#C9C4B6; --foam:#FDFCF9; }
+    body { margin:0; background:var(--bg); color:var(--ink); font-family:Inter,system-ui,sans-serif; }
+    .kicker { font-size:12px; letter-spacing:.18em; text-transform:uppercase; color:var(--soft); }
+    h1 { font-family:Oswald,sans-serif; font-weight:200; font-size:116px; line-height:.9; letter-spacing:-.02em; }
+    h1 em { font-family:"Instrument Serif",serif; font-style:italic; font-weight:400; }
+    .sub { font-size:17px; line-height:1.55; color:var(--muted); max-width:38ch; }
+    .pill-row { display:flex; gap:12px; justify-content:center; }
+    .cta { background:var(--ink); color:var(--foam); border-radius:999px; }
+  </style>
+</head>
+<body>
+  <header>
+    <a href="/">cloud-mem.ai</a>
+    <nav>
+      <a href="#how">How it works</a>
+      <a href="#integrations">Integrations</a>
+      <a href="#privacy">Privacy</a>
+    </nav>
+    <!-- RAW: CMEM PRO — EARLY ACCESS → LIVE: CLOUD MEM — EARLY ACCESS -->
+    <div class="kicker">CLOUD MEM — EARLY ACCESS</div>
+    <a class="cta" href="#waitlist">Join the waitlist</a>
+  </header>
+
+  <section id="hero">
+    <p class="kicker">Early access · Fall 2026</p>
+    <h1>AI <em>memory</em> in the cloud</h1>
+    <!-- First-draft sub (no CMEM Pro). Refinement sub was "Be first in line for CMEM Pro." -->
+    <p class="sub">One memory your assistants share. Everything you tell Claude, ChatGPT, or Cursor — remembered everywhere, forever.</p>
+    <p class="sub">Be first in line for Cloud Mem.</p>
+    <form id="waitlist">
+      <input type="email" placeholder="Email" required>
+      <button type="submit">Join the waitlist</button>
+    </form>
+  </section>
+
+  <section id="integrations">
+    <p class="kicker">Remembers across</p>
+    <div class="pill-row"><!-- Claude ChatGPT Cursor Gemini … — 4px hover lift, 14s breathe --></div>
+  </section>
+
+  <section id="mood">
+    <figure>
+      <img src="/mood.png" alt="Calm architectural space overlooking the sea">
+      <figcaption>A quiet, permanent place for everything you’ve said.</figcaption>
+    </figure>
+  </section>
+</body>
+</html>
