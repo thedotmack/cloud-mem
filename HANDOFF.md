@@ -28,6 +28,6 @@ If those files appear, pixel-match motion/type against `extracted-template.html`
 | `index.html` | Landing. Two `.waitlist-form`s share one fetch helper |
 | `api/waitlist.js` | Resend contacts + segment `6688e250-d2a9-402f-9497-a30dadf67898`. Needs `RESEND_API_KEY` in Vercel — **do not commit it** |
 | `mark.svg` / `favicon.svg` / `mood.png` | Existing assets |
-| Preview | Vercel Git integration on this repo auto-deploys the branch |
+| Preview | https://cloud-mem-git-cursor-richer-cloud-mem-landing-0bf1-claude-mem.vercel.app (Vercel SSO, same as PR #1) |
 
 `main` is not branch-protected. Merge → production updates automatically.
