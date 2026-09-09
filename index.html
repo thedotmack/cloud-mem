@@ -3,20 +3,20 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Cloud Mem — memory that stays with you</title>
-  <meta name="description" content="Cloud Mem is memory that stays with you. Leave your email and we'll write when it's ready.">
+  <title>Cloud Mem — AI memory in the cloud</title>
+  <meta name="description" content="Cloud Mem remembers your conversations across tools so you can find what matters, when you need it.">
   <link rel="canonical" href="https://cloud-mem.ai/">
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://cloud-mem.ai/">
-  <meta property="og:title" content="Cloud Mem — memory that stays with you">
-  <meta property="og:description" content="Memory that stays with you. Leave your email and we'll write when it's ready.">
-  <meta property="og:image" content="/mood.png">
+  <meta property="og:title" content="Cloud Mem — AI memory in the cloud">
+  <meta property="og:description" content="Cloud Mem remembers your conversations across tools so you can find what matters, when you need it.">
+  <meta property="og:image" content="/hero-pebble.jpg">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="theme-color" content="#F4F1EA">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Oswald:wght@200;300;400&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Oswald:wght@300;400;500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
   <style>
     :root {
       --bg: #F4F1EA;
@@ -25,9 +25,8 @@
       --soft: #9B968A;
       --line: #C9C4B6;
       --line-soft: #DDD8CB;
-      --card: #FBF9F4;
-      --night: #14120C;
-      --night-2: #1C1A14;
+      --card: #FFFFFF;
+      --tan: #E8DFD0;
       --foam: #FDFCF9;
     }
     * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -36,652 +35,678 @@
       background: var(--bg);
       color: var(--ink);
       font-family: Inter, system-ui, -apple-system, sans-serif;
-      min-height: 100vh;
       -webkit-font-smoothing: antialiased;
-      overflow-x: hidden;
     }
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      opacity: .22;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    }
+    body > .wrap { position: relative; z-index: 1; }
     @media (prefers-reduced-motion: reduce) {
       html { scroll-behavior: auto; }
-      .fade-in, .cm-breathe, .cm-drift, .cm-light, .cm-rise, .reveal,
-      .cm-grain, .mock-card, .timeline-row { animation: none !important; }
-      .reveal { opacity: 1; transform: none; }
+      .fade-in, .reveal { animation: none !important; transition: none !important; opacity: 1; transform: none; }
     }
-    .cm-stage { position: relative; isolation: isolate; }
-    .cm-light {
-      pointer-events: none;
-      position: absolute;
-      inset: -20% -10% auto;
-      height: 70vh;
-      background:
-        radial-gradient(42% 48% at 28% 28%, rgba(255,248,230,.72), transparent 68%),
-        radial-gradient(36% 40% at 78% 18%, rgba(214,196,160,.34), transparent 70%),
-        radial-gradient(28% 32% at 54% 62%, rgba(255,255,255,.28), transparent 72%);
-      animation: wash 16s ease-in-out infinite alternate;
-      z-index: -2;
-    }
-    .cm-drift {
-      pointer-events: none;
-      position: absolute;
-      width: 46vw;
-      height: 46vw;
-      max-width: 560px;
-      max-height: 560px;
-      left: 58%;
-      top: 8%;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(201,184,148,.22), transparent 68%);
-      filter: blur(8px);
-      animation: drift 22s ease-in-out infinite;
-      z-index: -2;
-    }
-    .cm-grain {
-      pointer-events: none;
-      position: absolute;
-      inset: 0;
-      opacity: .09;
-      mix-blend-mode: multiply;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-      animation: grain 8s steps(6) infinite;
-      z-index: -1;
-    }
-    @keyframes wash {
-      from { transform: translate3d(-2%, 0, 0) scale(1); }
-      to { transform: translate3d(3%, 3%, 0) scale(1.06); }
-    }
-    @keyframes drift {
-      0%, 100% { transform: translate3d(0, 0, 0); }
-      50% { transform: translate3d(-8%, 10%, 0); }
-    }
-    @keyframes grain {
-      0%, 100% { transform: translate(0, 0); }
-      20% { transform: translate(-2%, 1%); }
-      40% { transform: translate(1%, -2%); }
-      60% { transform: translate(-1%, 2%); }
-      80% { transform: translate(2%, -1%); }
-    }
-    .wrap { max-width: 1120px; margin: 0 auto; padding: 0 28px; }
-    .site-header {
-      position: sticky;
-      top: 0;
-      z-index: 20;
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      background: color-mix(in srgb, var(--bg) 82%, transparent);
-      border-bottom: 1px solid transparent;
-    }
-    .site-header.is-scrolled { border-bottom-color: var(--line-soft); }
-    .site-header .bar {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 18px 0;
-      gap: 16px;
-    }
+    .wrap { max-width: 1180px; margin: 0 auto; padding: 0 32px; }
     .brand {
       display: inline-flex;
       align-items: center;
       gap: 10px;
       color: var(--ink);
       text-decoration: none;
-    }
-    .brand .mark { display: block; width: 28px; height: 28px; flex: 0 0 auto; }
-    .wordmark {
-      font-family: Oswald, sans-serif;
-      font-weight: 300;
-      font-size: 18px;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: var(--ink);
-    }
-    .wordmark .quiet { color: var(--soft); }
-    .header-actions { display: flex; align-items: center; gap: 18px; }
-    .badge {
-      font-size: 12px;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--muted);
-    }
-    .header-cta {
-      display: inline-flex;
-      align-items: center;
-      font-size: 13px;
       font-weight: 500;
-      letter-spacing: .04em;
-      text-transform: uppercase;
-      text-decoration: none;
-      color: var(--foam);
+      font-size: 16px;
+    }
+    .brand svg { display: block; }
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 28px 0 8px;
+    }
+    .nav { display: flex; align-items: center; gap: 22px; }
+    .nav a { color: var(--muted); text-decoration: none; font-size: 14px; }
+    .nav a:hover { color: var(--ink); }
+    .nav-cta {
       background: var(--ink);
+      color: var(--foam);
       border-radius: 999px;
       padding: 10px 16px;
-      transition: transform .25s ease, box-shadow .25s ease;
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 500;
     }
-    .header-cta:hover { transform: translateY(-1px); box-shadow: 0 8px 18px rgba(22,21,15,.14); }
-    .hero { text-align: center; padding: 88px 0 28px; }
-    .kicker {
-      font-size: 12px;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: var(--soft);
-      margin-bottom: 22px;
+
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      gap: 40px;
+      align-items: center;
+      padding: 36px 0 80px;
     }
     .hero h1 {
       font-family: Oswald, sans-serif;
-      font-weight: 200;
-      font-size: clamp(52px, 10vw, 108px);
-      line-height: 0.9;
+      font-weight: 500;
+      font-size: clamp(56px, 8.4vw, 96px);
+      line-height: 0.88;
       letter-spacing: -0.02em;
-      margin: 0 auto 18px;
+      text-transform: uppercase;
     }
-    .hero .lede {
-      font-family: "Instrument Serif", serif;
-      font-style: italic;
-      font-size: clamp(24px, 3.4vw, 36px);
-      line-height: 1.25;
-      color: var(--ink);
-      margin: 0 auto 16px;
-      max-width: 18ch;
+    .rule {
+      width: 88px;
+      height: 1px;
+      background: var(--ink);
+      margin: 22px 0 18px;
     }
-    .hero p.sub {
+    .hero p.lede {
       font-size: 17px;
       line-height: 1.55;
-      color: var(--muted);
-      max-width: 38ch;
-      margin: 0 auto;
+      color: var(--ink);
+      max-width: 36ch;
+    }
+    .hero-photo {
+      border-radius: 0;
+      overflow: hidden;
+      min-height: 520px;
+      margin: 0 -32px 0 0;
+    }
+    .hero-photo img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      min-height: 520px;
     }
     .signup {
       display: flex;
-      justify-content: center;
-      gap: 14px;
-      margin-top: 36px;
+      align-items: stretch;
+      gap: 8px;
+      margin-top: 28px;
       flex-wrap: wrap;
     }
-    .signup input {
-      width: min(360px, 100%);
-      font-size: 17px;
-      padding: 18px 24px;
+    .signup.united {
+      display: inline-flex;
+      flex-wrap: nowrap;
+      gap: 0;
+      padding: 4px 4px 4px 4px;
       border: 1px solid var(--line);
       border-radius: 999px;
+      background: #F8F4EC;
+    }
+    .signup.united input {
+      border: 0;
       background: transparent;
+      width: min(260px, 52vw);
+      padding: 12px 16px;
+    }
+    .signup.united input:focus { outline: none; }
+    .signup input {
+      width: min(280px, 100%);
+      font-size: 15px;
+      padding: 14px 18px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: #F7F3EA;
       outline: none;
       font-family: inherit;
       color: var(--ink);
-      transition: border-color .3s ease, box-shadow .3s ease, background .3s ease;
     }
-    .signup input:hover { border-color: #A9A392; }
-    .signup input:focus {
-      border-color: var(--ink);
-      background: var(--card);
-      box-shadow: 0 0 0 4px rgba(22,21,15,.08);
-    }
+    .signup input:focus { border-color: var(--ink); }
     .signup button {
-      font-size: 16px;
+      font-size: 15px;
       font-weight: 500;
-      padding: 18px 28px;
+      padding: 14px 20px;
       border: none;
       border-radius: 999px;
       background: var(--ink);
       color: var(--foam);
       cursor: pointer;
-      transition: transform .25s ease, box-shadow .25s ease, opacity .2s;
+      font-family: inherit;
+      white-space: nowrap;
     }
-    .signup button:hover { transform: translateY(-2px); box-shadow: 0 10px 24px rgba(22,21,15,.16); }
-    .signup button:disabled { opacity: .55; cursor: wait; transform: none; box-shadow: none; }
-    .msg {
-      margin-top: 18px;
-      min-height: 1.4em;
-      font-size: 15px;
-      color: var(--muted);
-    }
+    .signup button:disabled { opacity: .55; cursor: wait; }
+    .msg { margin-top: 12px; min-height: 1.3em; font-size: 14px; color: var(--muted); }
     .msg.ok { color: var(--ink); }
     .msg.err { color: #8B3A2F; }
-    .promises {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 18px;
-      padding: 36px 0 72px;
-    }
-    .promise {
-      background: color-mix(in srgb, var(--card) 80%, transparent);
-      border: 1px solid var(--line-soft);
-      border-radius: 22px;
-      padding: 26px 24px 28px;
-      text-align: left;
-    }
-    .promise .n {
-      font-family: Oswald, sans-serif;
-      font-weight: 300;
-      letter-spacing: .16em;
-      font-size: 12px;
-      color: var(--soft);
-      margin-bottom: 14px;
-    }
-    .promise h2 {
+
+    .how { padding: 40px 0 80px; }
+    .how > .wrap > h2 {
       font-family: "Instrument Serif", serif;
       font-weight: 400;
-      font-size: 26px;
-      line-height: 1.15;
-      margin-bottom: 10px;
+      font-size: clamp(36px, 5vw, 52px);
+      text-align: center;
+      margin-bottom: 36px;
     }
-    .promise p { font-size: 15px; line-height: 1.55; color: var(--muted); }
-    .origin {
-      background: var(--night);
-      color: var(--foam);
-      padding: 88px 0 72px;
-      margin: 0 0 8px;
+    .how-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 22px;
     }
-    .origin .kicker { color: #B7B09A; }
-    .origin h2 {
+    .step {
+      background: #fff;
+      border-radius: 28px;
+      padding: 28px 24px 24px;
+      min-height: 420px;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 8px 28px rgba(22,21,15,.05);
+    }
+    .icon-circle {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      background: var(--tan);
+      display: grid;
+      place-items: center;
+      margin-bottom: 18px;
+    }
+    .step h3 {
+      font-family: "Instrument Serif", serif;
+      font-weight: 400;
+      font-size: 32px;
+    }
+    .step .desc {
+      font-family: Oswald, sans-serif;
+      font-weight: 300;
+      font-size: 15px;
+      letter-spacing: .02em;
+      color: var(--muted);
+      margin: 6px 0 18px;
+    }
+    .step .art {
+      flex: 1;
+      display: grid;
+      place-items: center;
+      padding: 8px 0 18px;
+    }
+    .step .art svg { width: min(100%, 180px); height: auto; }
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      align-self: flex-start;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 8px 14px;
+      font-size: 13px;
+      color: var(--ink);
+      background: var(--bg);
+    }
+
+    .features {
+      padding: 24px 0 88px;
+    }
+    .features-grid {
+      display: grid;
+      grid-template-columns: 1.1fr .9fr;
+      gap: 48px;
+      align-items: center;
+    }
+    .features h2 {
+      font-family: Oswald, sans-serif;
+      font-weight: 500;
+      font-size: clamp(40px, 6vw, 64px);
+      line-height: 0.95;
+      text-transform: uppercase;
+      letter-spacing: -0.01em;
+    }
+    .features .rule { background: #C4B18A; width: 72px; }
+    .features .serif {
+      font-family: "Instrument Serif", serif;
+      font-style: italic;
+      font-size: 20px;
+      line-height: 1.4;
+      max-width: 28ch;
+    }
+    .feat-list { display: grid; gap: 22px; margin-top: 28px; }
+    .feat {
+      display: grid;
+      grid-template-columns: 44px 1fr;
+      gap: 14px;
+      align-items: start;
+    }
+    .feat strong {
+      display: block;
+      font-size: 13px;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+    .feat p {
+      font-family: "Instrument Serif", serif;
+      font-size: 16px;
+      color: var(--muted);
+      line-height: 1.45;
+    }
+
+    .phone {
+      width: min(100%, 320px);
+      margin: 0 auto;
+      background: #111;
+      border-radius: 40px;
+      padding: 12px;
+      box-shadow: 0 24px 50px rgba(22,21,15,.18);
+      position: relative;
+    }
+    .phone:before {
+      content: "";
+      position: absolute;
+      top: 18px;
+      left: 50%;
+      width: 88px;
+      height: 18px;
+      transform: translateX(-50%);
+      background: #111;
+      border-radius: 12px;
+      z-index: 2;
+    }
+    .phone-screen {
+      background: var(--bg);
+      border-radius: 26px;
+      min-height: 520px;
+      padding: 22px 16px 18px;
+      display: flex;
+      flex-direction: column;
+    }
+    .phone-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 11px;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      margin-bottom: 18px;
+    }
+    .tl { position: relative; padding-left: 22px; display: grid; gap: 14px; flex: 1; }
+    .tl:before {
+      content: "";
+      position: absolute;
+      left: 6px;
+      top: 8px;
+      bottom: 8px;
+      width: 1px;
+      background: var(--line);
+    }
+    .tl-card {
+      position: relative;
+      background: #EFE8DA;
+      border-radius: 14px;
+      padding: 12px 12px 10px;
+    }
+    .tl-card:before {
+      content: "";
+      position: absolute;
+      left: -22px;
+      top: 14px;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background: var(--tan);
+      box-shadow: inset 0 0 0 1px var(--ink);
+    }
+    .tl-card .k { font-size: 10px; letter-spacing: .12em; text-transform: uppercase; color: var(--soft); }
+    .tl-card h4 { font-size: 15px; margin: 4px 0 6px; }
+    .tl-card p { font-size: 12px; line-height: 1.4; color: var(--muted); }
+    .tl-card .meta { font-size: 11px; color: var(--soft); margin-top: 8px; }
+    .mem-on {
+      margin: 16px auto 0;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 8px 14px;
+      font-size: 13px;
+      background: var(--card);
+    }
+
+    .place { padding: 24px 0 72px; }
+    .place h2 {
       font-family: "Instrument Serif", serif;
       font-style: italic;
       font-weight: 400;
-      font-size: clamp(36px, 6vw, 64px);
-      text-align: center;
-      line-height: 1.05;
-      margin: 0 auto 16px;
+      font-size: clamp(36px, 5.4vw, 56px);
+      line-height: 1.15;
+      max-width: 16ch;
     }
-    .origin .blurb {
-      text-align: center;
-      max-width: 42ch;
-      margin: 0 auto 36px;
-      color: #C9C3B2;
+    .place .sub {
+      margin: 16px 0 22px;
       font-size: 16px;
-      line-height: 1.55;
     }
-    .origin-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 18px;
+    .place .signup input { border-radius: 10px; background: #FBF8F1; }
+
+    .faq { padding: 8px 0 48px; }
+    .faq-head { text-align: center; margin-bottom: 28px; }
+    .faq-head .brand { justify-content: center; margin-bottom: 16px; }
+    .faq-head h2 {
+      font-family: Inter, system-ui, sans-serif;
+      font-weight: 600;
+      font-size: clamp(32px, 4.4vw, 44px);
+      letter-spacing: -0.02em;
+      margin: 0 0 10px;
     }
-    .origin-card {
-      display: flex;
-      flex-direction: column;
-      min-height: 100%;
-    }
-    .mock-stage {
-      position: relative;
+    .faq-head p { color: var(--muted); }
+    .faq-box {
+      background: var(--card);
+      border: 1px solid var(--line-soft);
       border-radius: 28px;
       overflow: hidden;
-      min-height: 340px;
-      padding: 28px 22px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
     }
-    .mock-stage.sea {
-      background:
-        linear-gradient(180deg, rgba(20,18,12,.18), rgba(20,18,12,.42)),
-        url("/mood.png") center 62% / cover no-repeat;
-    }
-    .mock-stage.dusk {
-      background:
-        radial-gradient(80% 70% at 30% 20%, rgba(214,184,132,.28), transparent 60%),
-        linear-gradient(160deg, #2A261C, #15130E 70%);
-    }
-    .mock-stage.leaf {
-      background:
-        radial-gradient(70% 60% at 70% 80%, rgba(110,130,88,.28), transparent 62%),
-        linear-gradient(200deg, #1E2418, #12140F 68%);
-    }
-    .glass {
-      width: min(100%, 280px);
-      background: rgba(16, 14, 10, .58);
-      border: 1px solid rgba(253,252,249,.14);
-      border-radius: 20px;
-      backdrop-filter: blur(18px);
-      -webkit-backdrop-filter: blur(18px);
-      padding: 16px 16px 14px;
-      color: var(--foam);
-      box-shadow: 0 18px 40px rgba(0,0,0,.22);
-    }
-    .glass .chip {
-      display: inline-flex;
-      font-size: 10px;
-      letter-spacing: .14em;
-      text-transform: uppercase;
-      color: #D7C9A4;
-      border: 1px solid rgba(215,201,164,.28);
-      border-radius: 999px;
-      padding: 4px 8px;
-      margin-bottom: 10px;
-    }
-    .glass h3 {
-      font-family: "Instrument Serif", serif;
-      font-size: 22px;
-      font-weight: 400;
-      margin-bottom: 6px;
-    }
-    .glass p, .glass li { font-size: 13px; line-height: 1.45; color: #D8D2C2; }
-    .glass ul { list-style: none; display: grid; gap: 8px; margin-top: 10px; }
-    .glass li {
-      display: flex;
-      justify-content: space-between;
-      gap: 10px;
-      padding: 8px 0;
-      border-top: 1px solid rgba(253,252,249,.08);
-    }
-    .ask {
+    .faq details { border-bottom: 1px solid var(--line-soft); }
+    .faq details:last-child { border-bottom: 0; }
+    .faq summary {
+      list-style: none;
+      cursor: pointer;
       display: grid;
-      gap: 10px;
-    }
-    .bubble {
-      background: rgba(253,252,249,.08);
-      border-radius: 14px 14px 14px 4px;
-      padding: 10px 12px;
-      font-size: 13px;
-      line-height: 1.4;
-    }
-    .ask-field {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 8px;
-      border: 1px solid rgba(253,252,249,.14);
-      border-radius: 999px;
-      padding: 8px 8px 8px 14px;
-      color: #B8B2A2;
-      font-size: 12px;
-    }
-    .ask-field span.send {
-      width: 28px;
-      height: 28px;
-      border-radius: 50%;
-      background: var(--foam);
-      color: var(--ink);
-      display: grid;
-      place-items: center;
-      font-size: 14px;
-    }
-    .origin-card h3.cap {
-      font-size: 18px;
-      font-weight: 500;
-      margin: 18px 0 8px;
-    }
-    .origin-card p.cap {
-      font-size: 14px;
-      line-height: 1.5;
-      color: #B8B29F;
-    }
-    .integrations { text-align: center; padding: 72px 0 56px; }
-    .integrations .label {
-      font-size: 12px;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      color: var(--soft);
-      margin-bottom: 22px;
-    }
-    .pills {
-      display: flex;
-      justify-content: center;
+      grid-template-columns: 28px 1fr 18px;
       gap: 14px;
-      flex-wrap: wrap;
-      max-width: 920px;
-      margin: 0 auto;
+      align-items: center;
+      padding: 20px 22px;
+      font-size: 16px;
+      font-weight: 500;
     }
-    .pill {
-      font-family: Oswald, sans-serif;
-      font-weight: 300;
-      font-size: 15px;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
+    .faq summary::-webkit-details-marker { display: none; }
+    .faq summary:after { content: "⌄"; color: var(--soft); font-size: 18px; }
+    .faq details[open] summary:after { transform: rotate(180deg); }
+    .faq details p {
+      padding: 0 22px 20px 64px;
       color: var(--muted);
-      padding: 11px 18px;
-      border: 1px solid var(--line-soft);
-      border-radius: 999px;
-      background: var(--card);
-      transition: transform .35s cubic-bezier(.22,1,.36,1), box-shadow .35s ease, color .35s ease, border-color .35s ease;
+      line-height: 1.55;
+      max-width: 70ch;
     }
-    .pill:hover {
-      transform: translateY(-3px);
-      color: var(--ink);
-      border-color: #B9B3A2;
-      box-shadow: 0 8px 22px rgba(22,21,15,.08);
-    }
-    .cm-breathe { animation: breathe 5.5s ease-in-out infinite; }
-    @keyframes breathe {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-4px); }
-    }
-    .mood { padding: 0 0 28px; }
-    .mood-frame {
-      position: relative;
-      border-radius: 24px;
-      overflow: hidden;
-    }
-    .mood-frame img {
-      display: block;
-      width: 100%;
-      height: clamp(280px, 48vw, 560px);
-      object-fit: cover;
-    }
-    .mood-frame .caption {
-      position: absolute;
-      left: 40px;
-      bottom: 32px;
-      margin: 0;
-      font-family: "Instrument Serif", serif;
-      font-size: clamp(22px, 3vw, 30px);
-      color: var(--foam);
-      text-shadow: 0 1px 24px rgba(20,21,15,.35);
-      max-width: 18ch;
-    }
-    .close {
-      text-align: center;
-      padding: 72px 0 24px;
-    }
-    .close h2 {
-      font-family: Oswald, sans-serif;
-      font-weight: 200;
-      font-size: clamp(36px, 6vw, 64px);
-      letter-spacing: -0.02em;
-      margin-bottom: 12px;
-    }
-    .close p {
-      color: var(--muted);
-      font-size: 17px;
-      max-width: 36ch;
-      margin: 0 auto;
-      line-height: 1.5;
-    }
+
     footer {
       display: flex;
-      align-items: center;
       justify-content: space-between;
+      align-items: center;
       gap: 16px;
       flex-wrap: wrap;
       padding: 28px 0 48px;
-      font-size: 14px;
       color: var(--muted);
+      font-size: 14px;
     }
-    footer .brand .mark { width: 22px; height: 22px; }
-    .fade-in {
-      opacity: 0;
-      transform: translateY(14px);
-      animation: rise .95s ease forwards;
-    }
-    .fade-in.d2 { animation-delay: .16s; }
-    .fade-in.d3 { animation-delay: .3s; }
-    .fade-in.d4 { animation-delay: .44s; }
-    .reveal {
-      opacity: 0;
-      transform: translateY(18px);
-      transition: opacity .8s ease, transform .8s ease;
-    }
+    .fade-in { opacity: 0; transform: translateY(12px); animation: rise .85s ease forwards; }
+    .fade-in.d2 { animation-delay: .14s; }
+    .fade-in.d3 { animation-delay: .28s; }
+    .reveal { opacity: 0; transform: translateY(16px); transition: opacity .7s ease, transform .7s ease; }
     .reveal.in { opacity: 1; transform: none; }
-    .reveal.d2 { transition-delay: .1s; }
-    .reveal.d3 { transition-delay: .2s; }
-    @keyframes rise {
-      to { opacity: 1; transform: none; }
-    }
+    @keyframes rise { to { opacity: 1; transform: none; } }
+
     @media (max-width: 900px) {
-      .promises, .origin-grid { grid-template-columns: 1fr; }
-      .header-cta { display: none; }
+      .hero, .features-grid, .how-grid { grid-template-columns: 1fr; }
+      .nav { display: none; }
+      .hero { padding-top: 24px; }
+      .hero-photo { margin: 0; min-height: 360px; border-radius: 20px; }
+      .hero-photo img { min-height: 360px; }
     }
     @media (max-width: 640px) {
-      .hero { padding: 56px 0 20px; }
-      .signup { flex-direction: column; align-items: stretch; }
-      .signup input, .signup button { width: 100%; }
-      .mood-frame .caption { left: 20px; bottom: 20px; }
-      .origin { padding: 64px 0 48px; }
+      .signup { flex-direction: column; }
+      .signup.united { display: flex; width: 100%; }
+      .signup input, .signup button, .signup.united input { width: 100%; }
     }
   </style>
 </head>
 <body>
-  <div class="cm-stage">
-    <div class="cm-light" aria-hidden="true"></div>
-    <div class="cm-drift" aria-hidden="true"></div>
-    <div class="cm-grain" aria-hidden="true"></div>
-
-    <header class="site-header" id="top">
-      <div class="wrap bar">
-        <a class="brand" href="/">
-          <img class="mark" src="/mark.svg" alt="" width="28" height="28">
-          <span class="wordmark">Cloud Mem</span>
-        </a>
-        <div class="header-actions">
-          <div class="badge">Early access</div>
-          <a class="header-cta" href="#waitlist">Join the waitlist</a>
-        </div>
-      </div>
+  <div class="wrap">
+    <header>
+      <a class="brand" href="/">
+        <svg width="22" height="16" viewBox="0 0 22 16" fill="none" aria-hidden="true">
+          <path d="M16.6 6.2A5.1 5.1 0 0 0 6.8 5.4 4.2 4.2 0 0 0 2 9.4 3.7 3.7 0 0 0 5.6 14h11.2A4.2 4.2 0 0 0 16.6 6.2Z" fill="#16150F"/>
+          <circle cx="6.2" cy="8.2" r="3.1" fill="#F4F1EA"/>
+        </svg>
+        Cloud Mem
+      </a>
+      <nav class="nav" aria-label="Page">
+        <a href="#how">How it works</a>
+        <a href="#features">Features</a>
+        <a href="#faq">FAQ</a>
+        <a class="nav-cta" href="#waitlist">Join the waitlist</a>
+      </nav>
     </header>
 
-    <main>
-      <section class="hero wrap">
-        <p class="kicker fade-in">Memory that stays with you</p>
-        <h1 class="fade-in d2">Cloud Mem</h1>
-        <p class="lede fade-in d3">A quiet place for everything you’ve said.</p>
-        <p class="sub fade-in d3">Leave your email and we’ll write when it’s ready. Same memory, wherever you talk.</p>
-        <form class="signup fade-in d4 waitlist-form" id="waitlist" novalidate>
-          <input class="waitlist-email" type="email" name="email" placeholder="Email" autocomplete="email" required aria-label="Email for the Cloud Mem waitlist">
-          <button type="submit">Join the waitlist</button>
+    <section class="hero" id="waitlist">
+      <div>
+        <h1 class="fade-in">AI memory<br>in the cloud</h1>
+        <div class="rule fade-in d2"></div>
+        <p class="lede fade-in d2">Cloud Mem remembers your conversations across tools so you can find what matters, when you need it.</p>
+        <form class="signup united fade-in d3 waitlist-form" novalidate>
+          <input class="waitlist-email" type="email" name="email" placeholder="Enter your work email" autocomplete="email" required aria-label="Email for the Cloud Mem waitlist">
+          <button type="submit">Join the waitlist →</button>
         </form>
         <p class="msg" data-waitlist-msg role="status" aria-live="polite"></p>
-      </section>
+      </div>
+      <figure class="hero-photo fade-in d2">
+        <img src="/hero-pebble.jpg" alt="A smooth stone with a glowing cloud, resting on linen" width="600" height="720">
+      </figure>
+    </section>
 
-      <section class="wrap promises" aria-label="What Cloud Mem is for">
-        <article class="promise reveal">
-          <p class="n">01</p>
-          <h2>It keeps the job.</h2>
-          <p>Preferences, decisions, and the plot of the work — so the next turn isn’t a blank stare.</p>
-        </article>
-        <article class="promise reveal d2">
-          <p class="n">02</p>
-          <h2>It travels with you.</h2>
-          <p>One memory across the assistants you already use. Talk anywhere. Come back whole.</p>
-        </article>
-        <article class="promise reveal d3">
-          <p class="n">03</p>
-          <h2>It stays quiet.</h2>
-          <p>No lecture. No dump of everything. Just the thread you actually need, when you need it.</p>
-        </article>
-      </section>
-    </main>
+    <section class="how" id="how">
+      <div class="wrap" style="padding:0">
+        <h2 class="reveal">How it works</h2>
+        <div class="how-grid">
+          <article class="step reveal">
+            <div class="icon-circle" aria-hidden="true">
+              <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M2.8 11.6V5.8A1.6 1.6 0 0 1 4.4 4.2h5.2A1.6 1.6 0 0 1 11.2 5.8v3.6A1.6 1.6 0 0 1 9.6 11H6.2L2.8 13Z" stroke="#16150F" stroke-width="1.15"/><path d="M8.4 12.2h4.8A1.4 1.4 0 0 0 14.6 10.8V8.4" stroke="#16150F" stroke-width="1.15"/></svg>
+            </div>
+            <h3>1 Capture</h3>
+            <p class="desc">conversations become memories</p>
+            <div class="art" aria-hidden="true">
+              <svg viewBox="0 0 180 120" fill="none">
+                <ellipse cx="100" cy="58" rx="58" ry="36" stroke="#16150F" stroke-width="1.4"/>
+                <circle cx="70" cy="48" r="1.2" fill="#16150F"/><circle cx="86" cy="40" r="1.2" fill="#16150F"/>
+                <circle cx="104" cy="38" r="1.2" fill="#16150F"/><circle cx="122" cy="44" r="1.2" fill="#16150F"/>
+                <circle cx="132" cy="58" r="1.2" fill="#16150F"/><circle cx="118" cy="70" r="1.2" fill="#16150F"/>
+                <circle cx="96" cy="76" r="1.2" fill="#16150F"/><circle cx="78" cy="70" r="1.2" fill="#16150F"/>
+                <rect x="28" y="62" width="52" height="36" rx="8" stroke="#16150F" stroke-width="1.4" fill="#FBF9F4"/>
+                <path d="M40 76h28M40 84h18" stroke="#16150F" stroke-width="1.2" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <span class="chip"><svg width="14" height="10" viewBox="0 0 14 10" fill="none" aria-hidden="true"><path d="M11.2 3.4A3.4 3.4 0 0 0 4.6 3a2.8 2.8 0 0 0-3.2 2.6A2.4 2.4 0 0 0 3.6 8.6h7.4A2.8 2.8 0 0 0 11.2 3.4Z" stroke="#16150F" stroke-width="1.1"/></svg>Saved to Cloud Mem</span>
+          </article>
+          <article class="step reveal">
+            <div class="icon-circle" aria-hidden="true">
+              <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M6.2 3.2 6.9 5.6 9.2 6.3 6.9 7 6.2 9.4 5.5 7 3.2 6.3 5.5 5.6 6.2 3.2Z" stroke="#16150F" stroke-width="1.05" stroke-linejoin="round"/><path d="M12.2 6.6 12.7 8.4 14.6 8.9 12.7 9.4 12.2 11.2 11.7 9.4 9.8 8.9 11.7 8.4 12.2 6.6Z" stroke="#16150F" stroke-width="1.05" stroke-linejoin="round"/><path d="M9.4 10.4 9.8 11.7 11.1 12.1 9.8 12.5 9.4 13.8 9 12.5 7.7 12.1 9 11.7 9.4 10.4Z" stroke="#16150F" stroke-width="1.05" stroke-linejoin="round"/></svg>
+            </div>
+            <h3>2 Focus</h3>
+            <p class="desc">attention surfaces what matters</p>
+            <div class="art" aria-hidden="true">
+              <svg viewBox="0 0 180 120" fill="none">
+                <path d="M40 78c18-28 82-28 100 0" stroke="#16150F" stroke-width="1.4"/>
+                <ellipse cx="90" cy="58" rx="34" ry="22" stroke="#16150F" stroke-width="1.4"/>
+                <circle cx="70" cy="36" r="1.1" fill="#16150F"/><circle cx="88" cy="30" r="1.1" fill="#16150F"/>
+                <circle cx="108" cy="34" r="1.1" fill="#16150F"/><circle cx="120" cy="46" r="1.1" fill="#16150F"/>
+              </svg>
+            </div>
+            <span class="chip"><svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M6 1.2 6.8 4.4 10 5.2 6.8 6 6 9.2 5.2 6 2 5.2 5.2 4.4 6 1.2Z" stroke="#16150F" stroke-width="1.1" stroke-linejoin="round"/></svg>Highlights that matter</span>
+          </article>
+          <article class="step reveal">
+            <div class="icon-circle" aria-hidden="true">
+              <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><circle cx="8" cy="8" r="4.4" stroke="#16150F" stroke-width="1.2"/><path d="m11.4 11.4 4 4" stroke="#16150F" stroke-width="1.2" stroke-linecap="round"/></svg>
+            </div>
+            <h3>3 Recall</h3>
+            <p class="desc">find it later across tools</p>
+            <div class="art" aria-hidden="true">
+              <svg viewBox="0 0 180 120" fill="none">
+                <rect x="28" y="28" width="124" height="28" rx="14" stroke="#16150F" stroke-width="1.4"/>
+                <circle cx="44" cy="42" r="6" stroke="#16150F" stroke-width="1.2"/>
+                <path d="M48.4 46.4 53 51" stroke="#16150F" stroke-width="1.2" stroke-linecap="round"/>
+                <path d="M64 42h70" stroke="#16150F" stroke-width="1.2" stroke-linecap="round"/>
+                <rect x="46" y="72" width="22" height="22" rx="5" stroke="#16150F" stroke-width="1.2"/>
+                <path d="M52 80h10M52 86h6" stroke="#16150F" stroke-width="1"/>
+                <rect x="79" y="72" width="22" height="22" rx="5" stroke="#16150F" stroke-width="1.2"/>
+                <path d="M84 86h12v-6a6 6 0 0 0-12 0Z" stroke="#16150F" stroke-width="1"/>
+                <rect x="112" y="72" width="22" height="22" rx="5" stroke="#16150F" stroke-width="1.2"/>
+                <rect x="117" y="77" width="12" height="12" rx="1" stroke="#16150F" stroke-width="1"/>
+              </svg>
+            </div>
+            <span class="chip"><svg width="14" height="12" viewBox="0 0 14 12" fill="none" aria-hidden="true"><circle cx="3" cy="6" r="1.4" stroke="#16150F"/><circle cx="11" cy="2.6" r="1.4" stroke="#16150F"/><circle cx="11" cy="9.4" r="1.4" stroke="#16150F"/><path d="M4.4 5.4 9.4 3.2M4.4 6.6 9.4 8.8" stroke="#16150F" stroke-width="1.1"/></svg>Find it anywhere</span>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="features" id="features">
+      <div class="features-grid">
+        <div>
+          <a class="brand reveal" href="/" style="margin-bottom:18px">
+            <svg width="22" height="16" viewBox="0 0 22 16" fill="none" aria-hidden="true"><path d="M16.6 6.2A5.1 5.1 0 0 0 6.8 5.4 4.2 4.2 0 0 0 2 9.4 3.7 3.7 0 0 0 5.6 14h11.2A4.2 4.2 0 0 0 16.6 6.2Z" fill="#16150F"/></svg>
+            Cloud Mem
+          </a>
+          <h2 class="reveal">Remembers<br>across everything<br>you use.</h2>
+          <div class="rule reveal"></div>
+          <p class="serif reveal">Cloud Mem keeps what matters so you can pick up anywhere, anytime.</p>
+          <div class="feat-list">
+            <div class="feat reveal">
+              <div class="icon-circle" aria-hidden="true">
+                <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><rect x="4.5" y="6" width="9" height="8" rx="2.2" stroke="#16150F" stroke-width="1.2"/><path d="M7 6V4.6M11 6V4.6M7.6 9.2h.01M10.4 9.2h.01M7.4 11.4h3.2" stroke="#16150F" stroke-width="1.2" stroke-linecap="round"/></svg>
+              </div>
+              <div>
+                <strong>Agents</strong>
+                <p>Remembers preferences, context, and past decisions.</p>
+              </div>
+            </div>
+            <div class="feat reveal">
+              <div class="icon-circle" aria-hidden="true">
+                <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M4 12.6V5.8A1.8 1.8 0 0 1 5.8 4h6.4A1.8 1.8 0 0 1 14 5.8v4.2A1.8 1.8 0 0 1 12.2 12H8l-4 2.4Z" stroke="#16150F" stroke-width="1.2"/></svg>
+              </div>
+              <div>
+                <strong>Chats</strong>
+                <p>Keeps follow-ups, clarifications, and threads alive.</p>
+              </div>
+            </div>
+            <div class="feat reveal">
+              <div class="icon-circle" aria-hidden="true">
+                <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M3.5 6.2V14h11V6.2H8.2L6.8 4.6H3.5Z" stroke="#16150F" stroke-width="1.2" stroke-linejoin="round"/></svg>
+              </div>
+              <div>
+                <strong>Projects</strong>
+                <p>Connects files, notes, and milestones across your work.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="phone reveal" aria-hidden="true">
+          <div class="phone-screen">
+            <div class="phone-top">
+              <span>Memory timeline</span>
+              <span class="brand" style="font-size:11px;letter-spacing:0;text-transform:none;gap:6px">
+                <svg width="14" height="10" viewBox="0 0 22 16" fill="none" aria-hidden="true"><path d="M16.6 6.2A5.1 5.1 0 0 0 6.8 5.4 4.2 4.2 0 0 0 2 9.4 3.7 3.7 0 0 0 5.6 14h11.2A4.2 4.2 0 0 0 16.6 6.2Z" fill="#16150F"/></svg>
+                Cloud Mem
+              </span>
+            </div>
+            <div class="tl">
+              <article class="tl-card">
+                <div class="k">Agent</div>
+                <h4>Research assistant</h4>
+                <p>Preferred sources, citation style, and summary format remembered.</p>
+                <div class="meta">Updated just now · Claude (via API)</div>
+              </article>
+              <article class="tl-card">
+                <div class="k">Chat</div>
+                <h4>Q&amp;A thread</h4>
+                <p>Follow-up on vector search and chunking strategy.</p>
+                <div class="meta">Yesterday · Chat</div>
+              </article>
+              <article class="tl-card">
+                <div class="k">Project</div>
+                <h4>Website redesign</h4>
+                <p>Branding assets, user flows, and feedback log connected.</p>
+                <div class="meta">2 days ago · Project</div>
+              </article>
+            </div>
+            <div class="mem-on">✦ Memory is on</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="place" id="place">
+      <h2 class="reveal">A quiet, permanent place for everything you’ve said.</h2>
+      <p class="sub reveal">Leave your email — we’ll write when Cloud Mem is ready.</p>
+      <form class="signup reveal waitlist-form" novalidate>
+        <input class="waitlist-email" type="email" name="email" placeholder="your@email.com" autocomplete="email" required aria-label="Email for the Cloud Mem waitlist">
+        <button type="submit">Join the waitlist</button>
+      </form>
+      <p class="msg" data-waitlist-msg role="status" aria-live="polite"></p>
+    </section>
+
+    <section class="faq" id="faq">
+      <div class="faq-head">
+        <div class="brand reveal">
+          <svg width="22" height="16" viewBox="0 0 22 16" fill="none" aria-hidden="true"><path d="M16.6 6.2A5.1 5.1 0 0 0 6.8 5.4 4.2 4.2 0 0 0 2 9.4 3.7 3.7 0 0 0 5.6 14h11.2A4.2 4.2 0 0 0 16.6 6.2Z" fill="#16150F"/></svg>
+          Cloud Mem
+        </div>
+        <h2 class="reveal">Got questions? Find answers.</h2>
+        <p class="reveal">Everything you need to know about Cloud Mem.</p>
+      </div>
+      <div class="faq-box reveal">
+        <details>
+          <summary>
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M10 3.2c2.2 1.6 3.6 3.4 3.6 5.4 0 2.4-1.6 3.8-3.6 5.6-2-1.8-3.6-3.2-3.6-5.6 0-2 1.4-3.8 3.6-5.4Z" stroke="#16150F" stroke-width="1.2"/><path d="M7.4 12.8c.6 1.6 1.6 2.6 2.6 3.6 1-1 2-2 2.6-3.6" stroke="#16150F" stroke-width="1.2"/></svg>
+            What is Cloud Mem and how does the AI memory work?
+          </summary>
+          <p>Cloud Mem keeps what you tell your assistants — the thread, the decisions, the plot of the work — so the next chat isn’t a blank stare. One memory, shared across the tools you already use.</p>
+        </details>
+        <details>
+          <summary>
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M10 3 16 5.4v5.2c0 3.4-2.4 5.8-6 6.8-3.6-1-6-3.4-6-6.8V5.4L10 3Z" stroke="#16150F" stroke-width="1.2"/><circle cx="10" cy="10.6" r="1.8" stroke="#16150F" stroke-width="1.2"/><path d="M10 12.4v1.6" stroke="#16150F" stroke-width="1.2" stroke-linecap="round"/></svg>
+            How does Cloud Mem protect my privacy and data?
+          </summary>
+          <p>Your memory is yours. We’ll say more when the product is in your hands — not as a lecture on this page.</p>
+        </details>
+        <details>
+          <summary>
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M15.4 8.2A4.4 4.4 0 0 0 7.2 7.6 3.6 3.6 0 0 0 3.2 11a3.2 3.2 0 0 0 3.1 3.8h9.2A3.6 3.6 0 0 0 15.4 8.2Z" stroke="#16150F" stroke-width="1.2"/></svg>
+            What happens during the waitlist period?
+          </summary>
+          <p>Leave your email. We’ll write when Cloud Mem is ready. No noise until then.</p>
+        </details>
+        <details>
+          <summary>
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><rect x="3" y="4.5" width="14" height="10" rx="1.6" stroke="#16150F" stroke-width="1.2"/><path d="M7 16.2h6" stroke="#16150F" stroke-width="1.2" stroke-linecap="round"/></svg>
+            Which devices and platforms does Cloud Mem support?
+          </summary>
+          <p>Cloud Mem is built to travel with the assistants you already use — Claude, ChatGPT, Cursor, and more. We’ll share the first set when early access opens.</p>
+        </details>
+        <details>
+          <summary>
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M14.6 6.2A5 5 0 0 0 6 7.4M5.4 13.8A5 5 0 0 0 14 12.6" stroke="#16150F" stroke-width="1.2" stroke-linecap="round"/><path d="M14.6 3.8v2.8H11.8M5.4 16.2v-2.8H8.2" stroke="#16150F" stroke-width="1.2" stroke-linecap="round"/></svg>
+            Can I integrate Cloud Mem with other tools I use?
+          </summary>
+          <p>Yes — that’s the point. One memory across agents, chats, and projects, so you can pick up anywhere.</p>
+        </details>
+        <details>
+          <summary>
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><circle cx="10" cy="10" r="6.4" stroke="#16150F" stroke-width="1.2"/><path d="M8.2 7.8c.4-.8 1.2-1.2 2-1.2 1 0 1.8.6 1.8 1.6 0 1.2-1.2 1.6-1.8 2v.6M10 13.6h.01" stroke="#16150F" stroke-width="1.2" stroke-linecap="round"/></svg>
+            Who is Cloud Mem for?
+          </summary>
+          <p>Anyone who talks to more than one assistant and is tired of starting over. Same memory, wherever you work.</p>
+        </details>
+      </div>
+    </section>
+
+    <footer>
+      <a class="brand" href="/">
+        <svg width="22" height="16" viewBox="0 0 22 16" fill="none" aria-hidden="true"><path d="M16.6 6.2A5.1 5.1 0 0 0 6.8 5.4 4.2 4.2 0 0 0 2 9.4 3.7 3.7 0 0 0 5.6 14h11.2A4.2 4.2 0 0 0 16.6 6.2Z" fill="#16150F"/></svg>
+        Cloud Mem
+      </a>
+      <div>© 2026 Cloud Mem</div>
+    </footer>
   </div>
 
-  <section class="origin" id="how" aria-labelledby="origin-title">
-    <div class="wrap">
-      <p class="kicker reveal">How it stays with you</p>
-      <h2 id="origin-title" class="reveal">See Cloud Mem in one place.</h2>
-      <p class="blurb reveal">A mock of the product face — notes that stick, a timeline that doesn’t reset, and a way to ask what you already knew.</p>
-      <div class="origin-grid">
-        <article class="origin-card reveal">
-          <div class="mock-stage sea">
-            <div class="glass" aria-hidden="true">
-              <span class="chip">Best match</span>
-              <h3>Keep the decision</h3>
-              <p>Yesterday’s call on the waitlist copy. Lead with Cloud Mem. Leave the internals off the page.</p>
-            </div>
-          </div>
-          <h3 class="cap">It remembers the call.</h3>
-          <p class="cap">The note that mattered yesterday is still there this morning — not buried in a chat you closed.</p>
-        </article>
-        <article class="origin-card reveal d2">
-          <div class="mock-stage dusk">
-            <div class="glass" aria-hidden="true">
-              <span class="chip">Timeline</span>
-              <h3>Still in the room</h3>
-              <ul>
-                <li><span>Locked the consumer name</span><span>Tue</span></li>
-                <li><span>Waitlist is live</span><span>Wed</span></li>
-                <li><span>Richer face next</span><span>Now</span></li>
-              </ul>
-            </div>
-          </div>
-          <h3 class="cap">The plot stays intact.</h3>
-          <p class="cap">A short trail of what happened — enough to start sharp, not a transcript dump.</p>
-        </article>
-        <article class="origin-card reveal d3">
-          <div class="mock-stage leaf">
-            <div class="glass ask" aria-hidden="true">
-              <span class="chip">Ask</span>
-              <div class="bubble">What did we decide about the public name?</div>
-              <div class="ask-field">Ask a follow up… <span class="send">↑</span></div>
-            </div>
-          </div>
-          <h3 class="cap">Ask anything you already knew.</h3>
-          <p class="cap">Recall the thread without re-briefing. Cloud Mem holds the past so you can keep moving.</p>
-        </article>
-      </div>
-    </div>
-  </section>
-
-  <section class="integrations wrap" aria-label="Platforms">
-    <p class="label">Remembers across</p>
-    <div class="pills cm-breathe" id="pills"></div>
-  </section>
-
-  <section class="mood wrap">
-    <div class="mood-frame">
-      <img src="/mood.png" alt="Calm architectural space overlooking the sea" width="1600" height="1000">
-      <p class="caption">A quiet, permanent place for everything you've said.</p>
-    </div>
-  </section>
-
-  <section class="close wrap" id="join">
-    <h2 class="reveal">Be first in line.</h2>
-    <p class="reveal">We’ll write when Cloud Mem is ready. No noise until then.</p>
-    <form class="signup reveal waitlist-form" novalidate>
-      <input class="waitlist-email" type="email" name="email" placeholder="Email" autocomplete="email" required aria-label="Email for the Cloud Mem waitlist">
-      <button type="submit">Join the waitlist</button>
-    </form>
-    <p class="msg" data-waitlist-msg role="status" aria-live="polite"></p>
-  </section>
-
-  <footer class="wrap">
-    <div class="brand">
-      <img class="mark" src="/mark.svg" alt="" width="22" height="22">
-      <span class="wordmark" style="font-size:16px">Cloud Mem<span class="quiet">.ai</span></span>
-    </div>
-    <div>© 2026 Cloud Mem</div>
-  </footer>
-
   <script>
-    const platforms = ["Claude","ChatGPT","Cursor","Gemini","Copilot","Perplexity","Grok","Mistral","Llama","DeepSeek","Windsurf","Replit","Devin","Codex","Manus","Poe"];
-    const pills = document.getElementById('pills');
-    platforms.forEach((name) => {
-      const el = document.createElement('div');
-      el.className = 'pill';
-      el.textContent = name;
-      pills.appendChild(el);
-    });
-
-    const header = document.querySelector('.site-header');
-    const onScroll = () => header.classList.toggle('is-scrolled', window.scrollY > 8);
-    onScroll();
-    window.addEventListener('scroll', onScroll, { passive: true });
-
     const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     const reveal = () => {
       document.querySelectorAll('.reveal').forEach((el) => {
-        const top = el.getBoundingClientRect().top;
-        if (top < window.innerHeight * 0.9) el.classList.add('in');
+        if (el.getBoundingClientRect().top < window.innerHeight * 0.92) el.classList.add('in');
       });
     };
-    if (reduced) {
-      document.querySelectorAll('.reveal').forEach((el) => el.classList.add('in'));
-    } else {
-      reveal();
-      window.addEventListener('scroll', reveal, { passive: true });
-    }
+    if (reduced) document.querySelectorAll('.reveal').forEach((el) => el.classList.add('in'));
+    else { reveal(); window.addEventListener('scroll', reveal, { passive: true }); }
 
     async function submitWaitlist(form) {
       const email = form.querySelector('.waitlist-email');
@@ -715,7 +740,6 @@
         submit.disabled = false;
       }
     }
-
     document.querySelectorAll('.waitlist-form').forEach((form) => {
       form.addEventListener('submit', (e) => {
         e.preventDefault();
