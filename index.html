@@ -3,14 +3,14 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Cloud Mem — memory that stays with you</title>
-  <meta name="description" content="Cloud Mem is memory that stays with you. Leave your email and we'll write when it's ready.">
+  <title>Cloud Mem — AI memory in the cloud</title>
+  <meta name="description" content="One memory your assistants share. Leave your email and we’ll write when Cloud Mem is ready.">
   <link rel="canonical" href="https://cloud-mem.ai/">
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://cloud-mem.ai/">
-  <meta property="og:title" content="Cloud Mem — memory that stays with you">
-  <meta property="og:description" content="Memory that stays with you. Leave your email and we'll write when it's ready.">
+  <meta property="og:title" content="Cloud Mem — AI memory in the cloud">
+  <meta property="og:description" content="One memory your assistants share. Remembered everywhere, forever.">
   <meta property="og:image" content="/mood.png">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="theme-color" content="#F4F1EA">
@@ -27,7 +27,6 @@
       --line-soft: #DDD8CB;
       --card: #FBF9F4;
       --night: #14120C;
-      --night-2: #1C1A14;
       --foam: #FDFCF9;
     }
     * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -42,21 +41,22 @@
     }
     @media (prefers-reduced-motion: reduce) {
       html { scroll-behavior: auto; }
-      .fade-in, .cm-breathe, .cm-drift, .cm-light, .cm-rise, .reveal,
-      .cm-grain, .mock-card, .timeline-row { animation: none !important; }
+      .fade-in, .cm-breathe, .cm-drift, .cm-light, .cm-grain, .reveal, .pill {
+        animation: none !important;
+      }
       .reveal { opacity: 1; transform: none; }
     }
     .cm-stage { position: relative; isolation: isolate; }
     .cm-light {
       pointer-events: none;
       position: absolute;
-      inset: -20% -10% auto;
-      height: 70vh;
+      inset: -18% -8% auto;
+      height: 72vh;
       background:
         radial-gradient(42% 48% at 28% 28%, rgba(255,248,230,.72), transparent 68%),
         radial-gradient(36% 40% at 78% 18%, rgba(214,196,160,.34), transparent 70%),
         radial-gradient(28% 32% at 54% 62%, rgba(255,255,255,.28), transparent 72%);
-      animation: wash 16s ease-in-out infinite alternate;
+      animation: wash 36s ease-in-out infinite alternate;
       z-index: -2;
     }
     .cm-drift {
@@ -67,37 +67,29 @@
       max-width: 560px;
       max-height: 560px;
       left: 58%;
-      top: 8%;
+      top: 6%;
       border-radius: 50%;
       background: radial-gradient(circle, rgba(201,184,148,.22), transparent 68%);
       filter: blur(8px);
-      animation: drift 22s ease-in-out infinite;
+      animation: drift 18s ease-in-out infinite;
       z-index: -2;
     }
     .cm-grain {
       pointer-events: none;
       position: absolute;
       inset: 0;
-      opacity: .09;
+      opacity: .08;
       mix-blend-mode: multiply;
       background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-      animation: grain 8s steps(6) infinite;
       z-index: -1;
     }
     @keyframes wash {
       from { transform: translate3d(-2%, 0, 0) scale(1); }
-      to { transform: translate3d(3%, 3%, 0) scale(1.06); }
+      to { transform: translate3d(3%, 3%, 0) scale(1.05); }
     }
     @keyframes drift {
       0%, 100% { transform: translate3d(0, 0, 0); }
-      50% { transform: translate3d(-8%, 10%, 0); }
-    }
-    @keyframes grain {
-      0%, 100% { transform: translate(0, 0); }
-      20% { transform: translate(-2%, 1%); }
-      40% { transform: translate(1%, -2%); }
-      60% { transform: translate(-1%, 2%); }
-      80% { transform: translate(2%, -1%); }
+      50% { transform: translate3d(-8%, 8%, 0); }
     }
     .wrap { max-width: 1120px; margin: 0 auto; padding: 0 28px; }
     .site-header {
@@ -107,15 +99,13 @@
       backdrop-filter: blur(16px);
       -webkit-backdrop-filter: blur(16px);
       background: color-mix(in srgb, var(--bg) 82%, transparent);
-      border-bottom: 1px solid transparent;
     }
-    .site-header.is-scrolled { border-bottom-color: var(--line-soft); }
     .site-header .bar {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 18px 0;
       gap: 16px;
+      padding: 22px 0;
     }
     .brand {
       display: inline-flex;
@@ -124,20 +114,29 @@
       color: var(--ink);
       text-decoration: none;
     }
-    .brand .mark { display: block; width: 28px; height: 28px; flex: 0 0 auto; }
+    .brand .mark { display: block; width: 26px; height: 26px; }
     .wordmark {
+      font-family: "Instrument Serif", serif;
+      font-size: 22px;
+      letter-spacing: -0.02em;
+    }
+    .nav {
+      display: flex;
+      align-items: center;
+      gap: 22px;
+    }
+    .nav a {
+      font-size: 13px;
+      color: var(--muted);
+      text-decoration: none;
+      letter-spacing: .01em;
+    }
+    .nav a:hover { color: var(--ink); }
+    .badge {
       font-family: Oswald, sans-serif;
       font-weight: 300;
-      font-size: 18px;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: var(--ink);
-    }
-    .wordmark .quiet { color: var(--soft); }
-    .header-actions { display: flex; align-items: center; gap: 18px; }
-    .badge {
       font-size: 12px;
-      letter-spacing: 0.14em;
+      letter-spacing: 0.16em;
       text-transform: uppercase;
       color: var(--muted);
     }
@@ -146,46 +145,44 @@
       align-items: center;
       font-size: 13px;
       font-weight: 500;
-      letter-spacing: .04em;
-      text-transform: uppercase;
       text-decoration: none;
       color: var(--foam);
       background: var(--ink);
       border-radius: 999px;
       padding: 10px 16px;
-      transition: transform .25s ease, box-shadow .25s ease;
     }
-    .header-cta:hover { transform: translateY(-1px); box-shadow: 0 8px 18px rgba(22,21,15,.14); }
-    .hero { text-align: center; padding: 88px 0 28px; }
+    .hero { text-align: center; padding: 96px 0 28px; }
     .kicker {
       font-size: 12px;
       letter-spacing: 0.18em;
       text-transform: uppercase;
       color: var(--soft);
-      margin-bottom: 22px;
+      margin-bottom: 28px;
     }
     .hero h1 {
       font-family: Oswald, sans-serif;
       font-weight: 200;
-      font-size: clamp(52px, 10vw, 108px);
+      font-size: clamp(52px, 10vw, 116px);
       line-height: 0.9;
       letter-spacing: -0.02em;
-      margin: 0 auto 18px;
+      margin: 0 auto 22px;
     }
-    .hero .lede {
+    .hero h1 em {
       font-family: "Instrument Serif", serif;
       font-style: italic;
-      font-size: clamp(24px, 3.4vw, 36px);
-      line-height: 1.25;
-      color: var(--ink);
-      margin: 0 auto 16px;
-      max-width: 18ch;
+      font-weight: 400;
     }
-    .hero p.sub {
-      font-size: 17px;
+    .hero .lede {
+      font-size: 18px;
       line-height: 1.55;
       color: var(--muted);
       max-width: 38ch;
+      margin: 0 auto 10px;
+    }
+    .hero .sub {
+      font-family: "Instrument Serif", serif;
+      font-size: 22px;
+      color: var(--ink);
       margin: 0 auto;
     }
     .signup {
@@ -205,9 +202,7 @@
       outline: none;
       font-family: inherit;
       color: var(--ink);
-      transition: border-color .3s ease, box-shadow .3s ease, background .3s ease;
     }
-    .signup input:hover { border-color: #A9A392; }
     .signup input:focus {
       border-color: var(--ink);
       background: var(--card);
@@ -222,59 +217,61 @@
       background: var(--ink);
       color: var(--foam);
       cursor: pointer;
-      transition: transform .25s ease, box-shadow .25s ease, opacity .2s;
     }
-    .signup button:hover { transform: translateY(-2px); box-shadow: 0 10px 24px rgba(22,21,15,.16); }
-    .signup button:disabled { opacity: .55; cursor: wait; transform: none; box-shadow: none; }
-    .msg {
-      margin-top: 18px;
-      min-height: 1.4em;
-      font-size: 15px;
-      color: var(--muted);
-    }
+    .signup button:disabled { opacity: .55; cursor: wait; }
+    .msg { margin-top: 16px; min-height: 1.4em; font-size: 15px; color: var(--muted); }
     .msg.ok { color: var(--ink); }
     .msg.err { color: #8B3A2F; }
-    .promises {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 18px;
-      padding: 36px 0 72px;
+    .integrations { text-align: center; padding: 56px 0 80px; }
+    .integrations .label {
+      font-size: 12px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--soft);
+      margin-bottom: 22px;
     }
-    .promise {
-      background: color-mix(in srgb, var(--card) 80%, transparent);
-      border: 1px solid var(--line-soft);
-      border-radius: 22px;
-      padding: 26px 24px 28px;
-      text-align: left;
+    .pills {
+      display: flex;
+      justify-content: center;
+      gap: 14px;
+      flex-wrap: wrap;
+      max-width: 920px;
+      margin: 0 auto;
     }
-    .promise .n {
+    .pill {
       font-family: Oswald, sans-serif;
       font-weight: 300;
-      letter-spacing: .16em;
-      font-size: 12px;
-      color: var(--soft);
-      margin-bottom: 14px;
+      font-size: 15px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+      padding: 11px 18px;
+      border: 1px solid var(--line-soft);
+      border-radius: 999px;
+      background: var(--card);
+      transition: transform .35s cubic-bezier(.22,1,.36,1), box-shadow .35s ease, color .35s ease;
     }
-    .promise h2 {
-      font-family: "Instrument Serif", serif;
-      font-weight: 400;
-      font-size: 26px;
-      line-height: 1.15;
-      margin-bottom: 10px;
+    .pill:hover {
+      transform: translateY(-4px);
+      color: var(--ink);
+      box-shadow: 0 8px 22px rgba(22,21,15,.08);
     }
-    .promise p { font-size: 15px; line-height: 1.55; color: var(--muted); }
+    .cm-breathe { animation: breathe 14s ease-in-out infinite; }
+    @keyframes breathe {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-4px); }
+    }
     .origin {
       background: var(--night);
       color: var(--foam);
-      padding: 88px 0 72px;
-      margin: 0 0 8px;
+      padding: 96px 0 80px;
     }
     .origin .kicker { color: #B7B09A; }
     .origin h2 {
       font-family: "Instrument Serif", serif;
       font-style: italic;
       font-weight: 400;
-      font-size: clamp(36px, 6vw, 64px);
+      font-size: clamp(40px, 6vw, 68px);
       text-align: center;
       line-height: 1.05;
       margin: 0 auto 16px;
@@ -282,7 +279,7 @@
     .origin .blurb {
       text-align: center;
       max-width: 42ch;
-      margin: 0 auto 36px;
+      margin: 0 auto 40px;
       color: #C9C3B2;
       font-size: 16px;
       line-height: 1.55;
@@ -291,11 +288,6 @@
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 18px;
-    }
-    .origin-card {
-      display: flex;
-      flex-direction: column;
-      min-height: 100%;
     }
     .mock-stage {
       position: relative;
@@ -329,9 +321,8 @@
       border-radius: 20px;
       backdrop-filter: blur(18px);
       -webkit-backdrop-filter: blur(18px);
-      padding: 16px 16px 14px;
+      padding: 16px;
       color: var(--foam);
-      box-shadow: 0 18px 40px rgba(0,0,0,.22);
     }
     .glass .chip {
       display: inline-flex;
@@ -351,7 +342,7 @@
       margin-bottom: 6px;
     }
     .glass p, .glass li { font-size: 13px; line-height: 1.45; color: #D8D2C2; }
-    .glass ul { list-style: none; display: grid; gap: 8px; margin-top: 10px; }
+    .glass ul { list-style: none; display: grid; gap: 0; margin-top: 10px; }
     .glass li {
       display: flex;
       justify-content: space-between;
@@ -359,22 +350,18 @@
       padding: 8px 0;
       border-top: 1px solid rgba(253,252,249,.08);
     }
-    .ask {
-      display: grid;
-      gap: 10px;
-    }
     .bubble {
       background: rgba(253,252,249,.08);
       border-radius: 14px 14px 14px 4px;
       padding: 10px 12px;
       font-size: 13px;
       line-height: 1.4;
+      margin-bottom: 10px;
     }
     .ask-field {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 8px;
       border: 1px solid rgba(253,252,249,.14);
       border-radius: 999px;
       padding: 8px 8px 8px 14px;
@@ -389,59 +376,51 @@
       color: var(--ink);
       display: grid;
       place-items: center;
-      font-size: 14px;
     }
-    .origin-card h3.cap {
-      font-size: 18px;
-      font-weight: 500;
-      margin: 18px 0 8px;
+    .origin-card h3.cap { font-size: 18px; font-weight: 500; margin: 18px 0 8px; }
+    .origin-card p.cap { font-size: 14px; line-height: 1.5; color: #B8B29F; }
+    .features { padding: 96px 0 40px; text-align: center; }
+    .features h2 {
+      font-family: "Instrument Serif", serif;
+      font-style: italic;
+      font-weight: 400;
+      font-size: clamp(36px, 5vw, 56px);
+      margin-bottom: 14px;
     }
-    .origin-card p.cap {
-      font-size: 14px;
-      line-height: 1.5;
-      color: #B8B29F;
+    .features .blurb {
+      max-width: 40ch;
+      margin: 0 auto 40px;
+      color: var(--muted);
+      line-height: 1.55;
     }
-    .integrations { text-align: center; padding: 72px 0 56px; }
-    .integrations .label {
-      font-size: 12px;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      color: var(--soft);
-      margin-bottom: 22px;
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+      text-align: left;
     }
-    .pills {
-      display: flex;
-      justify-content: center;
-      gap: 14px;
-      flex-wrap: wrap;
-      max-width: 920px;
-      margin: 0 auto;
+    .feature {
+      background: var(--card);
+      border: 1px solid var(--line-soft);
+      border-radius: 22px;
+      padding: 28px 24px;
     }
-    .pill {
+    .feature .n {
       font-family: Oswald, sans-serif;
       font-weight: 300;
-      font-size: 15px;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--muted);
-      padding: 11px 18px;
-      border: 1px solid var(--line-soft);
-      border-radius: 999px;
-      background: var(--card);
-      transition: transform .35s cubic-bezier(.22,1,.36,1), box-shadow .35s ease, color .35s ease, border-color .35s ease;
+      letter-spacing: .16em;
+      font-size: 12px;
+      color: var(--soft);
+      margin-bottom: 14px;
     }
-    .pill:hover {
-      transform: translateY(-3px);
-      color: var(--ink);
-      border-color: #B9B3A2;
-      box-shadow: 0 8px 22px rgba(22,21,15,.08);
+    .feature h3 {
+      font-family: Oswald, sans-serif;
+      font-weight: 300;
+      font-size: 28px;
+      margin-bottom: 10px;
     }
-    .cm-breathe { animation: breathe 5.5s ease-in-out infinite; }
-    @keyframes breathe {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-4px); }
-    }
-    .mood { padding: 0 0 28px; }
+    .feature p { font-size: 15px; line-height: 1.55; color: var(--muted); }
+    .close { padding: 48px 0 24px; }
     .mood-frame {
       position: relative;
       border-radius: 24px;
@@ -457,30 +436,52 @@
       position: absolute;
       left: 40px;
       bottom: 32px;
-      margin: 0;
       font-family: "Instrument Serif", serif;
       font-size: clamp(22px, 3vw, 30px);
       color: var(--foam);
       text-shadow: 0 1px 24px rgba(20,21,15,.35);
       max-width: 18ch;
     }
-    .close {
-      text-align: center;
-      padding: 72px 0 24px;
-    }
-    .close h2 {
+    .close-form { text-align: center; padding: 48px 0 16px; }
+    .close-form h2 {
       font-family: Oswald, sans-serif;
       font-weight: 200;
       font-size: clamp(36px, 6vw, 64px);
       letter-spacing: -0.02em;
       margin-bottom: 12px;
     }
-    .close p {
+    .close-form p {
       color: var(--muted);
       font-size: 17px;
       max-width: 36ch;
       margin: 0 auto;
       line-height: 1.5;
+    }
+    .faq { padding: 72px 0 32px; }
+    .faq h2 {
+      font-family: "Instrument Serif", serif;
+      font-style: italic;
+      font-size: clamp(36px, 5vw, 52px);
+      text-align: center;
+      margin-bottom: 36px;
+    }
+    .faq details {
+      border-top: 1px solid var(--line-soft);
+      padding: 18px 0;
+    }
+    .faq details:last-child { border-bottom: 1px solid var(--line-soft); }
+    .faq summary {
+      cursor: pointer;
+      font-size: 18px;
+      font-weight: 500;
+      list-style: none;
+    }
+    .faq summary::-webkit-details-marker { display: none; }
+    .faq details p {
+      margin-top: 10px;
+      color: var(--muted);
+      line-height: 1.55;
+      max-width: 62ch;
     }
     footer {
       display: flex;
@@ -488,7 +489,7 @@
       justify-content: space-between;
       gap: 16px;
       flex-wrap: wrap;
-      padding: 28px 0 48px;
+      padding: 36px 0 48px;
       font-size: 14px;
       color: var(--muted);
     }
@@ -509,19 +510,17 @@
     .reveal.in { opacity: 1; transform: none; }
     .reveal.d2 { transition-delay: .1s; }
     .reveal.d3 { transition-delay: .2s; }
-    @keyframes rise {
-      to { opacity: 1; transform: none; }
-    }
+    @keyframes rise { to { opacity: 1; transform: none; } }
     @media (max-width: 900px) {
-      .promises, .origin-grid { grid-template-columns: 1fr; }
-      .header-cta { display: none; }
+      .origin-grid, .feature-grid { grid-template-columns: 1fr; }
+      .nav { display: none; }
     }
     @media (max-width: 640px) {
       .hero { padding: 56px 0 20px; }
       .signup { flex-direction: column; align-items: stretch; }
       .signup input, .signup button { width: 100%; }
       .mood-frame .caption { left: 20px; bottom: 20px; }
-      .origin { padding: 64px 0 48px; }
+      .header-cta { display: none; }
     }
   </style>
 </head>
@@ -531,73 +530,63 @@
     <div class="cm-drift" aria-hidden="true"></div>
     <div class="cm-grain" aria-hidden="true"></div>
 
-    <header class="site-header" id="top">
+    <header class="site-header">
       <div class="wrap bar">
         <a class="brand" href="/">
-          <img class="mark" src="/mark.svg" alt="" width="28" height="28">
-          <span class="wordmark">Cloud Mem</span>
+          <img class="mark" src="/mark.svg" alt="" width="26" height="26">
+          <span class="wordmark">cloud-mem.ai</span>
         </a>
-        <div class="header-actions">
-          <div class="badge">Early access</div>
+        <nav class="nav" aria-label="Page">
+          <a href="#how">How it works</a>
+          <a href="#features">Features</a>
+          <a href="#privacy">Privacy</a>
+        </nav>
+        <div class="nav">
+          <div class="badge">Cloud Mem — Early access</div>
           <a class="header-cta" href="#waitlist">Join the waitlist</a>
         </div>
       </div>
     </header>
 
-    <main>
-      <section class="hero wrap">
-        <p class="kicker fade-in">Memory that stays with you</p>
-        <h1 class="fade-in d2">Cloud Mem</h1>
-        <p class="lede fade-in d3">A quiet place for everything you’ve said.</p>
-        <p class="sub fade-in d3">Leave your email and we’ll write when it’s ready. Same memory, wherever you talk.</p>
-        <form class="signup fade-in d4 waitlist-form" id="waitlist" novalidate>
-          <input class="waitlist-email" type="email" name="email" placeholder="Email" autocomplete="email" required aria-label="Email for the Cloud Mem waitlist">
-          <button type="submit">Join the waitlist</button>
-        </form>
-        <p class="msg" data-waitlist-msg role="status" aria-live="polite"></p>
-      </section>
+    <section class="hero wrap">
+      <p class="kicker fade-in">Early access · Fall 2026</p>
+      <h1 class="fade-in d2">AI <em>memory</em> in the cloud</h1>
+      <p class="lede fade-in d3">One memory your assistants share. Everything you tell Claude, ChatGPT, or Cursor — remembered everywhere, forever.</p>
+      <p class="sub fade-in d3">Be first in line for Cloud Mem.</p>
+      <form class="signup fade-in d4 waitlist-form" id="waitlist" novalidate>
+        <input class="waitlist-email" type="email" name="email" placeholder="Email" autocomplete="email" required aria-label="Email for the Cloud Mem waitlist">
+        <button type="submit">Join the waitlist</button>
+      </form>
+      <p class="msg" data-waitlist-msg role="status" aria-live="polite"></p>
+    </section>
 
-      <section class="wrap promises" aria-label="What Cloud Mem is for">
-        <article class="promise reveal">
-          <p class="n">01</p>
-          <h2>It keeps the job.</h2>
-          <p>Preferences, decisions, and the plot of the work — so the next turn isn’t a blank stare.</p>
-        </article>
-        <article class="promise reveal d2">
-          <p class="n">02</p>
-          <h2>It travels with you.</h2>
-          <p>One memory across the assistants you already use. Talk anywhere. Come back whole.</p>
-        </article>
-        <article class="promise reveal d3">
-          <p class="n">03</p>
-          <h2>It stays quiet.</h2>
-          <p>No lecture. No dump of everything. Just the thread you actually need, when you need it.</p>
-        </article>
-      </section>
-    </main>
+    <section class="integrations wrap" id="integrations" aria-label="Platforms">
+      <p class="label">Remembers across</p>
+      <div class="pills cm-breathe" id="pills"></div>
+    </section>
   </div>
 
-  <section class="origin" id="how" aria-labelledby="origin-title">
+  <section class="origin" id="how" aria-labelledby="how-title">
     <div class="wrap">
-      <p class="kicker reveal">How it stays with you</p>
-      <h2 id="origin-title" class="reveal">See Cloud Mem in one place.</h2>
-      <p class="blurb reveal">A mock of the product face — notes that stick, a timeline that doesn’t reset, and a way to ask what you already knew.</p>
+      <p class="kicker reveal">How it works</p>
+      <h2 id="how-title" class="reveal">Capture. Focus. Recall.</h2>
+      <p class="blurb reveal">A mock of the product face — after Origin’s three-up “How it works.” Same memory, wherever you talk.</p>
       <div class="origin-grid">
         <article class="origin-card reveal">
           <div class="mock-stage sea">
             <div class="glass" aria-hidden="true">
-              <span class="chip">Best match</span>
+              <span class="chip">Capture</span>
               <h3>Keep the decision</h3>
-              <p>Yesterday’s call on the waitlist copy. Lead with Cloud Mem. Leave the internals off the page.</p>
+              <p>Yesterday’s call on the public name. Lead with Cloud Mem. Leave the internals off the page.</p>
             </div>
           </div>
-          <h3 class="cap">It remembers the call.</h3>
-          <p class="cap">The note that mattered yesterday is still there this morning — not buried in a chat you closed.</p>
+          <h3 class="cap">Capture</h3>
+          <p class="cap">What you said stays said. The note that mattered yesterday is still here this morning.</p>
         </article>
         <article class="origin-card reveal d2">
           <div class="mock-stage dusk">
             <div class="glass" aria-hidden="true">
-              <span class="chip">Timeline</span>
+              <span class="chip">Focus</span>
               <h3>Still in the room</h3>
               <ul>
                 <li><span>Locked the consumer name</span><span>Tue</span></li>
@@ -606,50 +595,87 @@
               </ul>
             </div>
           </div>
-          <h3 class="cap">The plot stays intact.</h3>
+          <h3 class="cap">Focus</h3>
           <p class="cap">A short trail of what happened — enough to start sharp, not a transcript dump.</p>
         </article>
         <article class="origin-card reveal d3">
           <div class="mock-stage leaf">
-            <div class="glass ask" aria-hidden="true">
-              <span class="chip">Ask</span>
+            <div class="glass" aria-hidden="true">
+              <span class="chip">Recall</span>
               <div class="bubble">What did we decide about the public name?</div>
               <div class="ask-field">Ask a follow up… <span class="send">↑</span></div>
             </div>
           </div>
-          <h3 class="cap">Ask anything you already knew.</h3>
-          <p class="cap">Recall the thread without re-briefing. Cloud Mem holds the past so you can keep moving.</p>
+          <h3 class="cap">Recall</h3>
+          <p class="cap">Ask anything you already knew. Cloud Mem holds the past so you can keep moving.</p>
         </article>
       </div>
     </div>
   </section>
 
-  <section class="integrations wrap" aria-label="Platforms">
-    <p class="label">Remembers across</p>
-    <div class="pills cm-breathe" id="pills"></div>
-  </section>
-
-  <section class="mood wrap">
-    <div class="mood-frame">
-      <img src="/mood.png" alt="Calm architectural space overlooking the sea" width="1600" height="1000">
-      <p class="caption">A quiet, permanent place for everything you've said.</p>
+  <section class="features wrap" id="features">
+    <p class="kicker reveal">Features</p>
+    <h2 class="reveal">Remembers across the work.</h2>
+    <p class="blurb reveal">Agents, chats, and projects — one memory, not three piles.</p>
+    <div class="feature-grid">
+      <article class="feature reveal">
+        <p class="n">Agents</p>
+        <h3>Assistants</h3>
+        <p>Claude, ChatGPT, Cursor, and the rest. Talk anywhere. Come back whole.</p>
+      </article>
+      <article class="feature reveal d2">
+        <p class="n">Chats</p>
+        <h3>Threads</h3>
+        <p>The conversation doesn’t reset when you open a new window. The plot stays intact.</p>
+      </article>
+      <article class="feature reveal d3">
+        <p class="n">Projects</p>
+        <h3>The job</h3>
+        <p>Preferences, decisions, and the work in progress — so the next turn isn’t a blank stare.</p>
+      </article>
     </div>
   </section>
 
-  <section class="close wrap" id="join">
-    <h2 class="reveal">Be first in line.</h2>
-    <p class="reveal">We’ll write when Cloud Mem is ready. No noise until then.</p>
-    <form class="signup reveal waitlist-form" novalidate>
-      <input class="waitlist-email" type="email" name="email" placeholder="Email" autocomplete="email" required aria-label="Email for the Cloud Mem waitlist">
-      <button type="submit">Join the waitlist</button>
-    </form>
-    <p class="msg" data-waitlist-msg role="status" aria-live="polite"></p>
+  <section class="close wrap" id="place">
+    <div class="mood-frame reveal">
+      <img src="/mood.png" alt="Calm architectural space overlooking the sea" width="1600" height="1000">
+      <p class="caption">A quiet, permanent place for everything you’ve said.</p>
+    </div>
+    <div class="close-form">
+      <h2 class="reveal">Stay in the room.</h2>
+      <p class="reveal">We’ll write when Cloud Mem is ready. No noise until then.</p>
+      <form class="signup reveal waitlist-form" novalidate>
+        <input class="waitlist-email" type="email" name="email" placeholder="Email" autocomplete="email" required aria-label="Email for the Cloud Mem waitlist">
+        <button type="submit">Join the waitlist</button>
+      </form>
+      <p class="msg" data-waitlist-msg role="status" aria-live="polite"></p>
+    </div>
+  </section>
+
+  <section class="faq wrap" id="privacy">
+    <h2 class="reveal">A few quiet answers.</h2>
+    <details class="reveal">
+      <summary>What is Cloud Mem?</summary>
+      <p>Memory that stays with you. One place for what you’ve already told your assistants — so the next chat isn’t a blank stare.</p>
+    </details>
+    <details class="reveal">
+      <summary>What do you remember?</summary>
+      <p>The thread, the decisions, the plot of the work. Not a dump of everything. Just what you need when you come back.</p>
+    </details>
+    <details class="reveal">
+      <summary>When is it ready?</summary>
+      <p>Early access, Fall 2026. Leave your email and we’ll write. No noise until then.</p>
+    </details>
+    <details class="reveal" id="privacy-q">
+      <summary>What about privacy?</summary>
+      <p>Your memory is yours. We’ll say more when the product is in your hands — not as a lecture on this page.</p>
+    </details>
   </section>
 
   <footer class="wrap">
     <div class="brand">
       <img class="mark" src="/mark.svg" alt="" width="22" height="22">
-      <span class="wordmark" style="font-size:16px">Cloud Mem<span class="quiet">.ai</span></span>
+      <span class="wordmark" style="font-size:18px">cloud-mem.ai</span>
     </div>
     <div>© 2026 Cloud Mem</div>
   </footer>
@@ -664,16 +690,10 @@
       pills.appendChild(el);
     });
 
-    const header = document.querySelector('.site-header');
-    const onScroll = () => header.classList.toggle('is-scrolled', window.scrollY > 8);
-    onScroll();
-    window.addEventListener('scroll', onScroll, { passive: true });
-
     const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     const reveal = () => {
       document.querySelectorAll('.reveal').forEach((el) => {
-        const top = el.getBoundingClientRect().top;
-        if (top < window.innerHeight * 0.9) el.classList.add('in');
+        if (el.getBoundingClientRect().top < window.innerHeight * 0.9) el.classList.add('in');
       });
     };
     if (reduced) {
