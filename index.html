@@ -173,6 +173,42 @@
     .msg.ok { color: var(--ink); }
     .msg.err { color: #8B3A2F; }
 
+    .loved { padding: 0 0 72px; text-align: center; }
+    .loved-cap {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--soft);
+      margin-bottom: 14px;
+    }
+    .loved-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 10px;
+      list-style: none;
+    }
+    .loved-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      height: 42px;
+      padding: 0 14px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: var(--foam);
+      color: var(--ink);
+      font-size: 14px;
+      font-weight: 500;
+    }
+    .loved-chip img {
+      width: 22px;
+      height: 22px;
+      border-radius: 6px;
+      background: #fff;
+      object-fit: contain;
+    }
+
     .how { padding: 40px 0 80px; }
     .how > .wrap > h2 {
       font-family: "Instrument Serif", serif;
@@ -447,6 +483,7 @@
       .signup { flex-direction: column; }
       .signup.united { display: flex; width: 100%; }
       .signup input, .signup button, .signup.united input { width: 100%; }
+      .loved-chip { height: 38px; padding: 0 12px; font-size: 13px; }
     }
   </style>
 </head>
@@ -482,6 +519,32 @@
       <figure class="hero-photo fade-in d2">
         <img src="/hero-pebble.jpg" alt="A smooth stone with a glowing cloud, resting on linen" width="600" height="720">
       </figure>
+    </section>
+
+    <section class="loved reveal" aria-label="Loved by professionals at">
+      <p class="loved-cap">Loved by professionals at</p>
+      <ul class="loved-row">
+        <li class="loved-chip">
+          <img src="https://www.google.com/s2/favicons?domain_url=https://zipline.com&sz=128" alt="" width="22" height="22" loading="lazy">
+          <span>Zipline</span>
+        </li>
+        <li class="loved-chip">
+          <img src="https://www.google.com/s2/favicons?domain_url=https://www.ge.com&sz=128" alt="" width="22" height="22" loading="lazy">
+          <span>GE</span>
+        </li>
+        <li class="loved-chip">
+          <img src="https://www.google.com/s2/favicons?domain_url=https://manus.im&sz=128" alt="" width="22" height="22" loading="lazy">
+          <span>Manus</span>
+        </li>
+        <li class="loved-chip">
+          <img src="https://www.google.com/s2/favicons?domain_url=https://aicollective.com&sz=128" alt="" width="22" height="22" loading="lazy">
+          <span>The AI Collective</span>
+        </li>
+        <li class="loved-chip">
+          <img src="https://www.google.com/s2/favicons?domain_url=https://dimensionalos.com&sz=128" alt="" width="22" height="22" loading="lazy">
+          <span>Dimensional</span>
+        </li>
+      </ul>
     </section>
 
     <section class="how" id="how">
